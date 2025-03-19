@@ -9,7 +9,7 @@
 }
 
 .signup-container {
-    max-width: 1000px;
+    max-width: 1200px; /* Increased width */
     width: 100%;
     margin: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -21,7 +21,7 @@
 .signup-left {
     background-color: #02487a;
     color: #ffffff;
-    padding: 40px;
+    padding: 60px; /* Increased padding */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -41,7 +41,7 @@
 }
 
 .signup-right {
-    padding: 40px;
+    padding: 60px; /* Increased padding */
 }
 
 .signup-form .form-group {
@@ -62,7 +62,7 @@
 }
 
 .signup-form .form-control:focus {
-    border-color:#02487a;
+    border-color: #02487a;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
@@ -74,7 +74,7 @@
 }
 
 .signup-form .form-select:focus {
-    border-color:#02487a;
+    border-color: #02487a;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 

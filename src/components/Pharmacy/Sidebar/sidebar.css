@@ -1,18 +1,53 @@
 /* Sidebar container */
 .sidebar {
     position: fixed;
-    top: 90px; /* Pushes sidebar down to avoid navbar collision */
-    left: 20px; /* Adds space from the left */
-    width: 280px; /* Adjust width if needed */
-    height: calc(100vh - 100px); /* Adjusted height to fit well */
-    background-color: #fff; /* White background */
-    color: #000000; /* Black text */
+    top: 90px;
+    left: 20px;
+    width: 280px;
+    height: calc(100vh - 100px);
+    background-color: #fff;
+    color: #000000;
     padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Shadow for depth */
-    overflow-y: auto; /* Enable vertical scrolling if content is long */
-    border-radius: 20px; /* Rounded corners */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    border-radius: 20px;
     border: 2px solid #02487aa2;
+    transition: transform 0.3s ease; /* Smooth transition for toggling */
+    z-index: 1000; /* Ensure sidebar is above other content */
+}
 
+/* Toggle Button for Small Screens */
+.sidebar-toggle {
+    display: none; /* Hide by default */
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #02487a;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1001; /* Ensure button is above sidebar */
+}
+
+.sidebar-toggle:hover {
+    background-color: #013a63;
+}
+
+/* Hide sidebar by default on small screens */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%); /* Move sidebar off-screen */
+    }
+
+    .sidebar.visible {
+        transform: translateX(0); /* Bring sidebar back on-screen */
+    }
+
+    .sidebar-toggle {
+        display: block; /* Show toggle button on small screens */
+    }
 }
 
 /* Logo styling */
@@ -29,12 +64,12 @@
 /* Heading styling */
 .sidebar h2 {
     font-size: 16px;
-    color: #000000; /* Black for headings */
+    color: #000000;
     margin-bottom: 10px;
     text-transform: uppercase;
-    font-weight: bold; /* Bold titles */
+    font-weight: bold;
     position: relative;
-    padding-bottom: 10px; /* Space for the line */
+    padding-bottom: 10px;
 }
 
 /* Line after each title */
@@ -45,16 +80,16 @@
     bottom: 0;
     width: 100%;
     height: 1px;
-    background-color: #ddd; /* Light gray line */
+    background-color: #ddd;
 }
 
 /* Space between titles and features */
 .sidebar h2 {
-    margin-top: 20px; /* Add space above the title */
+    margin-top: 20px;
 }
 
 .sidebar h2:first-child {
-    margin-top: 0; /* Remove extra space for the first title */
+    margin-top: 0;
 }
 
 /* List styling */
@@ -71,7 +106,7 @@
 /* Link styling */
 .sidebar ul li a {
     text-decoration: none;
-    color: #1a4661; /* Light gray for links */
+    color: #1a4661;
     display: flex;
     align-items: center;
     padding: 10px;
@@ -87,14 +122,14 @@
 
 /* Hover effect for links */
 .sidebar ul li a:hover {
-    background-color: #02487a; /* Darker blue on hover */
+    background-color: #02487a;
     color: #fff;
-    border-radius: 5px; /* Rounded hover effect */
+    border-radius: 5px;
 }
 
 /* Active link styling */
 .sidebar ul li a.active {
-    background-color: #02487a; /* Darker blue for active link */
+    background-color: #02487a;
     color: #fff;
     border-radius: 5px;
 }
@@ -105,30 +140,14 @@
 }
 
 .sidebar::-webkit-scrollbar-track {
-    background: #f1f1f1; /* Light gray for scrollbar track */
+    background: #f1f1f1;
 }
 
 .sidebar::-webkit-scrollbar-thumb {
-    background: #02487a; /* Blue scrollbar thumb */
+    background: #02487a;
     border-radius: 8px;
 }
 
 .sidebar::-webkit-scrollbar-thumb:hover {
-    background: #013a63; /* Darker blue on hover */
-}
-
-.sidebar::-webkit-scrollbar-track {
-    background: #f1f1f1; /* Light gray for scrollbar track */
-    border-radius: 4px; /* Rounded corners for the track */
-    margin-top: 10px; /* Add space at the top */
-    margin-bottom: 10px; /* Add space at the bottom */
-}
-
-.sidebar::-webkit-scrollbar-thumb {
-    background: #02487a; /* Blue scrollbar thumb */
-    border-radius: 4px; /* Rounded corners for the thumb */
-}
-
-.sidebar::-webkit-scrollbar-thumb:hover {
-    background: #013a63; /* Darker blue on hover */
+    background: #013a63;
 }

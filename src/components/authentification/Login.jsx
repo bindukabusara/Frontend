@@ -44,12 +44,12 @@ const Login = () => {
     return (
         <Container className="signup-page">
             <Row className="signup-container">
-                <Col md={5} className="signup-left">
+                <Col md={4} className="signup-left">
                     <h2 className="fw-bold">Welcome back</h2>
                     <p>Log in to your account to continue.</p>
                 </Col>
 
-                <Col md={7} className="p-5">
+                <Col md={8} className="p-5">
                     <Form onSubmit={handleLogin}>
                         {error && <Alert variant="danger">{error}</Alert>}
 
