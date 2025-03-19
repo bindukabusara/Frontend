@@ -1,7 +1,7 @@
 import Home from './components/Home';
 import Signup from '../src/components/authentification/Signup'
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';``
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from '../src/components/authentification/Login';
 import Sidebar from '../src/components/Pharmacy/Sidebar/Sidebar'
