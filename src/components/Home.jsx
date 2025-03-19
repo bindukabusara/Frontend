@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Container, Row, Col, Button, Card, Navbar, Nav } from "react-bootstrap";
 import { FaPills, FaClock, FaUserMd, FaChartLine } from "react-icons/fa"; // Icons
 import { useNavigate } from "react-router-dom"; // Import useNavigate
@@ -152,7 +152,10 @@ const Home = () => {
               <p className="cta-subtitle">
                 Join FLOW+ today and experience the future of pharmacy management.
               </p>
-              <Button variant="primary" size="lg" className="cta-button">
+              <Button  size="lg"
+                variant="primary"
+                className="nav-button ms-2"
+                onClick={handleGetStarted} >
                 Sign Up Now
               </Button>
             </Col>
