@@ -26,7 +26,7 @@ const ExpiringMedications = () => {
     try {
       const expiredResponse = await axios.get("https://backend-zltr.onrender.com/api/expired");
       const expiringSoonResponse = await axios.get("https://backend-zltr.onrender.com/api/expiring-soon");
-      const expiringInThreeMonthsResponse = await axios.get("https://backend-zltr.onrender.com/expiring-in-three-months");
+      const expiringInThreeMonthsResponse = await axios.get("https://backend-zltr.onrender.com/api/expiring-in-three-months");
 
       setExpiredMedications(expiredResponse.data);
       setExpiringSoonMedications(expiringSoonResponse.data);
