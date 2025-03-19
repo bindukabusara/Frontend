@@ -145,7 +145,7 @@ const ReportPage = () => {
     <div className="report-page-container">
       <Navbar />
       <Sidebar />
-      <div className="main-content">
+      <div className="main-content"><br></br><br></br>
         <Container>
           <h2>Pharmacy Report</h2>
           {error && <Alert variant="danger">{error}</Alert>}
