@@ -2,58 +2,53 @@
 .home-page {
   font-family: "Arial", sans-serif;
   color: #333;
-  background-color: #ffffff; /* Dominant white background */
+  background-color: #ffffff;
 }
 
 /* Navbar */
 .navbar {
-  padding: 5px 0; /* Further reduced padding for a slimmer navbar */
-  border-bottom: 1px solid #e0e0e0; /* Light border for separation */
+  padding: 10px 0;
+  border-bottom: 1px solid #e0e0e0;
 }
 
-.navbar {
-  height: 80px; /* Adjust the height as needed */
-  padding: 5px 20px; /* Reduce padding if necessary */
-  line-height: 20px; /* Align content properly */
-}
 .logo {
-  height: 25px; /* Further reduced logo size */
+  height: 30px; /* Default logo size */
 }
 
 .nav-link {
-  font-size: 0.85rem; /* Smaller font size */
+  font-size: 0.9rem;
   color: #333 !important;
-  margin: 0 4px; /* Reduced margin between links */
-  padding: 2px 2px; /* Reduced padding inside links */
+  margin: 0 8px;
+  padding: 5px 10px;
 }
 
 .nav-link:hover {
-  color: #007bff !important; /* Brand accent color */
+  color: #007bff !important;
 }
 
 .nav-button {
-  font-size: 0.85rem; /* Smaller font size */
-  padding: 4px 8px; /* Smaller padding */
-  margin-left: 8px; /* Reduced margin between buttons */
+  font-size: 0.9rem;
+  padding: 5px 10px;
+  margin-left: 10px;
 }
 
 /* Hero Section */
 .hero-section {
-  padding: 40px 0; /* Reduced padding */
+  padding: 60px 0;
 }
 
 .hero-title {
-  font-size: 2.5rem; /* Smaller font size */
+  font-size: 2.5rem;
   font-weight: bold;
   color: #333;
 }
 
 .brand-name {
-  color: #007bff; /* Brand accent color */
+  color: #007bff;
 }
 
 .hero-subtitle {
-  font-size: 1.1rem; /* Smaller font size */
+  font-size: 1.1rem;
   color: #555;
   margin: 20px 0;
 }
@@ -61,22 +56,23 @@
 .cta-button {
   margin-top: 20px;
   padding: 10px 30px;
-  font-size: 1rem; /* Smaller font size */
+  font-size: 1rem;
 }
 
 .hero-image {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 100%; /* Ensure image doesn't overflow */
 }
 
 /* Features Section */
 .features-section {
-  padding: 40px 0; /* Reduced padding */
-  background-color: #f8f9fa; /* Light gray background */
+  padding: 60px 0;
+  background-color: #f8f9fa;
 }
 
 .section-title {
-  font-size: 2rem; /* Smaller font size */
+  font-size: 2rem;
   font-weight: bold;
   color: #333;
 }
@@ -86,7 +82,7 @@
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
-  height: 100%; /* Ensure all cards have the same height */
+  height: 100%;
 }
 
 .feature-card:hover {
@@ -94,48 +90,204 @@
 }
 
 .feature-icon {
-  font-size: 2rem; /* Smaller icon size */
+  font-size: 2rem;
   color: #007bff;
-  margin-bottom: 15px; /* Reduced margin */
+  margin-bottom: 15px;
 }
 
 .feature-title {
-  font-size: 1.25rem; /* Smaller font size */
+  font-size: 1.25rem;
   font-weight: bold;
   color: #333;
 }
 
 .feature-description {
-  font-size: 0.9rem; /* Smaller font size */
+  font-size: 0.9rem;
   color: #555;
 }
 
 /* Call-to-Action Section */
 .cta-section {
-  padding: 40px 0; /* Reduced padding */
+  padding: 60px 0;
 }
 
 .cta-title {
-  font-size: 2rem; /* Smaller font size */
+  font-size: 2rem;
   font-weight: bold;
   color: #333;
 }
 
 .cta-subtitle {
-  font-size: 1.1rem; /* Smaller font size */
+  font-size: 1.1rem;
   color: #555;
   margin: 20px 0;
 }
 
 /* Footer Section */
 .footer {
-  padding: 15px 0; /* Reduced padding */
-  background-color: #f8f9fa; /* Light gray background */
-  border-top: 1px solid #ffffff; /* Light border for separation */
+  padding: 20px 0;
+  background-color: #f8f9fa;
+  border-top: 1px solid #e0e0e0;
 }
 
 .footer-text {
-  font-size: 0.8rem; /* Smaller font size */
+  font-size: 0.9rem;
   color: #555;
   margin: 0;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  /* Navbar */
+  .logo {
+    height: 25px; /* Smaller logo for tablets */
+  }
+
+  .nav-link {
+    font-size: 0.8rem;
+    margin: 0 5px;
+    padding: 3px 8px;
+  }
+
+  .nav-button {
+    font-size: 0.8rem;
+    padding: 4px 8px;
+    margin-left: 5px;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    padding: 40px 0;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .cta-button {
+    font-size: 0.9rem;
+    padding: 8px 20px;
+  }
+
+  /* Features Section */
+  .features-section {
+    padding: 40px 0;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+  }
+
+  .feature-card {
+    margin-bottom: 20px; /* Add space between cards on smaller screens */
+  }
+
+  .feature-icon {
+    font-size: 1.75rem;
+  }
+
+  .feature-title {
+    font-size: 1.1rem;
+  }
+
+  .feature-description {
+    font-size: 0.85rem;
+  }
+
+  /* Call-to-Action Section */
+  .cta-section {
+    padding: 40px 0;
+  }
+
+  .cta-title {
+    font-size: 1.75rem;
+  }
+
+  .cta-subtitle {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  /* Navbar */
+  .logo {
+    height: 20px; /* Smaller logo for mobile */
+  }
+
+  .nav-link {
+    font-size: 0.75rem;
+    margin: 0 3px;
+    padding: 2px 5px;
+  }
+
+  .nav-button {
+    font-size: 0.75rem;
+    padding: 3px 6px;
+    margin-left: 3px;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    padding: 30px 0;
+  }
+
+  .hero-title {
+    font-size: 1.75rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .cta-button {
+    font-size: 0.8rem;
+    padding: 6px 15px;
+  }
+
+  /* Features Section */
+  .features-section {
+    padding: 30px 0;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .feature-icon {
+    font-size: 1.5rem;
+  }
+
+  .feature-title {
+    font-size: 1rem;
+  }
+
+  .feature-description {
+    font-size: 0.8rem;
+  }
+
+  /* Call-to-Action Section */
+  .cta-section {
+    padding: 30px 0;
+  }
+
+  .cta-title {
+    font-size: 1.5rem;
+  }
+
+  .cta-subtitle {
+    font-size: 0.9rem;
+  }
+
+  /* Footer Section */
+  .footer {
+    padding: 15px 0;
+  }
+
+  .footer-text {
+    font-size: 0.8rem;
+  }
 }
