@@ -24,9 +24,9 @@ const ExpiringMedications = () => {
 
   const fetchExpiringMedications = async () => {
     try {
-      const expiredResponse = await axios.get("http://localhost:5009/api/expired");
-      const expiringSoonResponse = await axios.get("http://localhost:5009/api/expiring-soon");
-      const expiringInThreeMonthsResponse = await axios.get("http://localhost:5009/api/expiring-in-three-months");
+      const expiredResponse = await axios.get("https://backend-zltr.onrender.com/api/expired");
+      const expiringSoonResponse = await axios.get("https://backend-zltr.onrender.com/api/expiring-soon");
+      const expiringInThreeMonthsResponse = await axios.get("https://backend-zltr.onrender.com/expiring-in-three-months");
 
       setExpiredMedications(expiredResponse.data);
       setExpiringSoonMedications(expiringSoonResponse.data);
@@ -39,7 +39,7 @@ const ExpiringMedications = () => {
 
   const handleSearch = async () => {
     try {
-      const response = await axios.get(`http://localhost:5009/api/by-expire-date?date=${searchDate}`);
+      const response = await axios.get(`https://backend-zltr.onrender.com/api/by-expire-date?date=${searchDate}`);
       setSearchResults(response.data);
     } catch (err) {
       setError("Failed to fetch medications by expire date");

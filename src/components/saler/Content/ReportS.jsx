@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Button, Table, Alert, Form, Modal } from "react-bootstrap";
 import axios from "axios";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Legend, Cell, PieChart, Pie } from "recharts";
@@ -26,22 +26,22 @@ const ReportPage = () => {
 
   const fetchReportData = async () => {
     try {
-      const totalResponse = await axios.get("http://localhost:5009/api/medications");
+      const totalResponse = await axios.get("https://backend-zltr.onrender.com/api/medications");
       setTotalMedications(totalResponse.data.length);
 
-      const expiringSoonResponse = await axios.get("http://localhost:5009/api/expiring-soon");
+      const expiringSoonResponse = await axios.get("https://backend-zltr.onrender.com/api/expiring-soon");
       setExpiringSoon(expiringSoonResponse.data.length);
 
-      const expiredResponse = await axios.get("http://localhost:5009/api/expired");
+      const expiredResponse = await axios.get("https://backend-zltr.onrender.com/api/expired");
       setExpiredMedications(expiredResponse.data.length);
 
-      const expiringInThreeMonthsResponse = await axios.get("http://localhost:5009/api/expiring-in-three-months");
+      const expiringInThreeMonthsResponse = await axios.get("https://backend-zltr.onrender.com/api/expiring-in-three-months");
       setExpiringInThreeMonths(expiringInThreeMonthsResponse.data.length);
 
-      const lowQuantityResponse = await axios.get("http://localhost:5009/api/low-quantity");
+      const lowQuantityResponse = await axios.get("https://backend-zltr.onrender.com/api/low-quantity");
       setLowQuantityMedications(lowQuantityResponse.data.length);
 
-      const nonExpiredInStockResponse = await axios.get("http://localhost:5009/api/non-expired-in-stock");
+      const nonExpiredInStockResponse = await axios.get("https://backend-zltr.onrender.com/api/non-expired-in-stock");
       setNonExpiredMedicationsInStock(nonExpiredInStockResponse.data.length);
     } catch (err) {
       setError("Failed to fetch report data");
@@ -51,7 +51,7 @@ const ReportPage = () => {
 
   const fetchExpiredByMonth = async (year) => {
     try {
-      const response = await axios.get(`http://localhost:5009/api/expired-by-month?year=${year}`);
+      const response = await axios.get(`https://backend-zltr.onrender.com/api/expired-by-month?year=${year}`);
       if (response.data && Array.isArray(response.data)) {
         setExpiredByMonth(response.data);
       } else {
@@ -69,22 +69,22 @@ const ReportPage = () => {
       let endpoint = "";
       switch (category) {
         case "Total Medications":
-          endpoint = "http://localhost:5009/api/medications";
+          endpoint = "https://backend-zltr.onrender.com/api/medications";
           break;
         case "Expiring Soon":
-          endpoint = "http://localhost:5009/api/expiring-soon";
+          endpoint = "https://backend-zltr.onrender.com/api/expiring-soon";
           break;
         case "Expired Medications":
-          endpoint = "http://localhost:5009/api/expired";
+          endpoint = "https://backend-zltr.onrender.com/api/expired";
           break;
         case "Expiring in 3 Months":
-          endpoint = "http://localhost:5009/api/expiring-in-three-months";
+          endpoint = "https://backend-zltr.onrender.com/api/expiring-in-three-months";
           break;
         case "Low Quantity Medications":
-          endpoint = "http://localhost:5009/api/low-quantity";
+          endpoint = "https://backend-zltr.onrender.com/api/low-quantity";
           break;
         case "Non-Expired Medications in Stock":
-          endpoint = "http://localhost:5009/api/non-expired-in-stock";
+          endpoint = "https://backend-zltr.onrender.com/api/non-expired-in-stock";
           break;
         default:
           break;

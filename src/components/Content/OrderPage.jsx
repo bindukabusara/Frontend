@@ -18,7 +18,7 @@ const AllCartsPage = () => {
   useEffect(() => {
     const fetchCarts = async () => {
       try {
-        const response = await axios.get("http://localhost:5009/api/cart/all");
+        const response = await axios.get("https://backend-zltr.onrender.com/api/cart/all");
         setCarts(response.data);
       } catch (err) {
         setError("Failed to fetch carts");
@@ -70,7 +70,7 @@ const AllCartsPage = () => {
     try {
       // Update the cart with instructions, additional notes, and times to take
       const response = await axios.put(
-        `http://localhost:5009/api/cart/${selectedCart._id}/confirm`,
+        `https://backend-zltr.onrender.com/api/cart/${selectedCart._id}/confirm`,
         {
           instructions,
           additionalNotes,

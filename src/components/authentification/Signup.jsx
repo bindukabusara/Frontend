@@ -41,7 +41,7 @@ const Signup = () => {
                 userData.licenseNumber = licenseNumber;
             }
 
-            const response = await axios.post("http://localhost:5009/api/register", userData);
+            const response = await axios.post("https://backend-zltr.onrender.com/api/register", userData);
 
             // Store user info in localStorage
             localStorage.setItem("user", JSON.stringify({

@@ -33,7 +33,7 @@ const MedicationStore = () => {
   // Fetch all medications and filter out expired ones
   const fetchMedications = async () => {
     try {
-      const response = await axios.get("http://localhost:5009/api/medications");
+      const response = await axios.get("https://backend-zltr.onrender.com/api/medications");
       const currentDate = new Date();
 
       // Filter out expired medications
@@ -51,7 +51,7 @@ const MedicationStore = () => {
   // Fetch orders to check for new notifications
   const fetchOrders = async () => {
     try {
-      const response = await axios.get("http://localhost:5009/api/orders");
+      const response = await axios.get("https://backend-zltr.onrender.com/api/orders");
       if (response.data.length > 0) {
         setNotification("New order placed!");
       }
@@ -87,12 +87,12 @@ const MedicationStore = () => {
 
     try {
       if (editId) {
-        await axios.put(`http://localhost:5009/api/medications/${editId}`, formData, {
+        await axios.put(`https://backend-zltr.onrender.com/api/medications/${editId}`, formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
         setSuccess("Medication updated successfully");
       } else {
-        await axios.post("http://localhost:5009/api/medications", formData, {
+        await axios.post("https://backend-zltr.onrender.com/api/medications", formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
         setSuccess("Medication added successfully");
@@ -121,7 +121,7 @@ const MedicationStore = () => {
   // Handle deleting a medication
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5009/api/medications/${id}`);
+      await axios.delete(`https://backend-zltr.onrender.com/api/medications/${id}`);
       setSuccess("Medication deleted successfully");
       fetchMedications(); // Refresh the list after deletion
     } catch (err) {

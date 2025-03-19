@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Alert } from "react-bootstrap";
 import axios from "axios";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Legend } from "recharts"; // Import recharts components
@@ -21,19 +21,19 @@ const Dashboard = () => {
   const fetchDashboardData = async () => {
     try {
       // Fetch total medications
-      const totalResponse = await axios.get("http://localhost:5009/api/medications");
+      const totalResponse = await axios.get("https://backend-zltr.onrender.com/api/medications");
       setTotalMedications(totalResponse.data.length);
 
       // Fetch medications expiring soon (less than 1 week)
-      const expiringSoonResponse = await axios.get("http://localhost:5009/api/expiring-soon");
+      const expiringSoonResponse = await axios.get("https://backend-zltr.onrender.com/api/expiring-soon");
       setExpiringSoon(expiringSoonResponse.data.length);
 
       // Fetch expired medications
-      const expiredResponse = await axios.get("http://localhost:5009/api/expired");
+      const expiredResponse = await axios.get("https://backend-zltr.onrender.com/api/expired");
       setExpiredMedications(expiredResponse.data.length);
 
       // Fetch medications expiring in 3 months
-      const expiringInThreeMonthsResponse = await axios.get("http://localhost:5009/api/expiring-in-three-months");
+      const expiringInThreeMonthsResponse = await axios.get("https://backend-zltr.onrender.com/api/expiring-in-three-months");
       setExpiringInThreeMonths(expiringInThreeMonthsResponse.data.length);
     } catch (err) {
       setError("Failed to fetch dashboard data");

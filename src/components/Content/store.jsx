@@ -19,7 +19,7 @@ const MedicationStore = () => {
   // Fetch all medications and filter out expired ones
   const fetchMedications = async () => {
     try {
-      const response = await axios.get("http://localhost:5009/api/medications");
+      const response = await axios.get("https://backend-zltr.onrender.com/api/medications");
       const currentDate = new Date();
 
       // Filter out expired medications

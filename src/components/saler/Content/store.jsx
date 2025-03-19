@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Form, Button, Table, Alert } from "react-bootstrap";
+import { useState, useEffect } from "react";
+import { Container, Row, Col, Form, Button, Table } from "react-bootstrap";
 import axios from "axios";
 import SidebarS from "../Bar/SidebarS";
 import "./store.css";
@@ -19,7 +19,7 @@ const MedicationStore = () => {
   // Fetch all medications and filter out expired ones
   const fetchMedications = async () => {
     try {
-      const response = await axios.get("http://localhost:5009/api/medications");
+      const response = await axios.get("https://backend-zltr.onrender.com/api/medications");
       const currentDate = new Date();
 
       // Filter out expired medications

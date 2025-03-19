@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Table, Button, Modal, Form } from "react-bootstrap";
+import { useState, useEffect } from "react";
+import { Container, Table, Button, Modal, Form } from "react-bootstrap";
 import axios from "axios";
 //import Sidebar from "../Pharmacy/Sidebar/sidebar";
 //import Navbar from "../Pharmacy/Sidebar/Navbar";
@@ -16,7 +16,7 @@ const OrdersPage = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get("http://localhost:5009/api/cart/orders");
+        const response = await axios.get("https://backend-zltr.onrender.com/api/cart/orders");
         setOrders(response.data);
       } catch (err) {
         setError("Failed to fetch orders");
@@ -40,7 +40,7 @@ const OrdersPage = () => {
       console.log("Instructions:", instructions);
 
       // Update medication quantity
-      await axios.put(`http://localhost:5009/api/medications/${selectedOrder.medicationId}/update-quantity`, {
+      await axios.put(`https://backend-zltr.onrender.com/api/medications/${selectedOrder.medicationId}/update-quantity`, {
         quantity: selectedOrder.quantity,
       });
 
@@ -50,7 +50,7 @@ const OrdersPage = () => {
       setSelectedOrder(null);
 
       // Refresh orders
-      const response = await axios.get("http://localhost:5009/api/cart/orders");
+      const response = await axios.get("https://backend-zltr.onrender.com/api/cart/orders");
       setOrders(response.data);
     } catch (err) {
       setError("Failed to save instructions or update quantity");

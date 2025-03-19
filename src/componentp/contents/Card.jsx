@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import axios from "axios";
 import SidebarP from "../bar/SidebarP";
@@ -16,7 +16,7 @@ const MyCartPage = () => {
         const fetchCartItems = async () => {
             try {
                 const token = localStorage.getItem("token");
-                const response = await axios.get("http://localhost:5009/api/cart", {
+                const response = await axios.get("https://backend-zltr.onrender.com/api/cart", {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setCart(response.data);
@@ -49,7 +49,7 @@ const MyCartPage = () => {
 
             if (newQuantity > 0) {
                 await axios.put(
-                    `http://localhost:5009/api/cart/${id}`,
+                    `https://backend-zltr.onrender.com/api/cart/${id}`,
                     { quantity: newQuantity },
                     { headers: { Authorization: `Bearer ${token}` } }
                 );
@@ -71,7 +71,7 @@ const MyCartPage = () => {
     const removeFromCart = async (id) => {
         try {
             const token = localStorage.getItem("token");
-            await axios.delete(`http://localhost:5009/api/cart/${id}`, {
+            await axios.delete(`https://backend-zltr.onrender.com/api/cart/${id}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             const updatedCart = cart.filter((item) => item._id !== id);
@@ -105,7 +105,7 @@ const MyCartPage = () => {
                                             <Row>
                                                 <Col md={2}>
                                                     <img
-                                                        src={`http://localhost:5009/uploads/${item.image}`}
+                                                        src={`https://backend-zltr.onrender.com/uploads/${item.image}`}
                                                         alt={item.name}
                                                         className="cart-img"
                                                     />

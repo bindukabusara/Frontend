@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Button, Offcanvas, Form } from "react-bootstrap";
 import axios from "axios";
 import SidebarP from "../bar/SidebarP";
@@ -20,7 +20,7 @@ const OrderPage = () => {
     useEffect(() => {
         const fetchMedications = async () => {
             try {
-                const response = await axios.get("http://localhost:5009/api/medications");
+                const response = await axios.get("https://backend-zltr.onrender.com/api/medications");
                 const currentDate = new Date();
 
                 // Filter out expired medications
@@ -43,7 +43,7 @@ const OrderPage = () => {
         const fetchCartItems = async () => {
             try {
                 const token = localStorage.getItem("token");
-                const response = await axios.get("http://localhost:5009/api/cart", {
+                const response = await axios.get("https://backend-zltr.onrender.com/api/cart", {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setCart(response.data);
@@ -83,7 +83,7 @@ const OrderPage = () => {
             };
 
             const response = await axios.post(
-                "http://localhost:5009/api/cart/add",
+                "https://backend-zltr.onrender.com/api/cart/add",
                 payload,
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -125,7 +125,7 @@ const OrderPage = () => {
 
             if (newQuantity > 0) {
                 const response = await axios.put(
-                    `http://localhost:5009/api/cart/${id}`,
+                    `https://backend-zltr.onrender.com/api/cart/${id}`,
                     { quantity: newQuantity },
                     { headers: { Authorization: `Bearer ${token}` } }
                 );
@@ -136,7 +136,7 @@ const OrderPage = () => {
                     )
                 );
             } else {
-                await axios.delete(`http://localhost:5009/api/cart/${id}`, {
+                await axios.delete(`https://backend-zltr.onrender.com/api/cart/${id}`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setCart((prevCart) => prevCart.filter((item) => item._id !== id));
@@ -150,7 +150,7 @@ const OrderPage = () => {
     const removeFromCart = async (id) => {
         try {
             const token = localStorage.getItem("token");
-            await axios.delete(`http://localhost:5009/api/cart/${id}`, {
+            await axios.delete(`https://backend-zltr.onrender.com/api/cart/${id}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             setCart((prevCart) => prevCart.filter((item) => item._id !== id));
@@ -196,7 +196,7 @@ const OrderPage = () => {
                                     <div className="med-img-container">
                                         <Card.Img
                                             variant="top"
-                                            src={`http://localhost:5009/uploads/${medication.image}`}
+                                            src={`https://backend-zltr.onrender.com/uploads/${medication.image}`}
                                             className="med-img"
                                         />
                                     </div>
@@ -227,7 +227,7 @@ const OrderPage = () => {
                             {cart.map((item) => (
                                 <div key={item._id} className="cart-item">
                                     <img
-                                        src={`http://localhost:5009/uploads/${item.image}`}
+                                        src={`https://backend-zltr.onrender.com/uploads/${item.image}`}
                                         alt={item.name}
                                         className="cart-img"
                                     />

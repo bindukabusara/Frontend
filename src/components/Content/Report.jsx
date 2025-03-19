@@ -24,19 +24,19 @@ const ReportPage = () => {
   const fetchReportData = async () => {
     try {
       // Fetch total medications
-      const totalResponse = await axios.get("http://localhost:5009/api/medications");
+      const totalResponse = await axios.get("https://backend-zltr.onrender.com/api/medications");
       setTotalMedications(totalResponse.data.length);
 
       // Fetch medications expiring soon (less than 1 week)
-      const expiringSoonResponse = await axios.get("http://localhost:5009/api/expiring-soon");
+      const expiringSoonResponse = await axios.get("https://backend-zltr.onrender.com/api/expiring-soon");
       setExpiringSoon(expiringSoonResponse.data.length);
 
       // Fetch expired medications
-      const expiredResponse = await axios.get("http://localhost:5009/api/expired");
+      const expiredResponse = await axios.get("https://backend-zltr.onrender.com/api/expired");
       setExpiredMedications(expiredResponse.data.length);
 
       // Fetch medications expiring in 3 months
-      const expiringInThreeMonthsResponse = await axios.get("http://localhost:5009/api/expiring-in-three-months");
+      const expiringInThreeMonthsResponse = await axios.get("https://backend-zltr.onrender.com/api/expiring-in-three-months");
       setExpiringInThreeMonths(expiringInThreeMonthsResponse.data.length);
     } catch (err) {
       setError("Failed to fetch report data");
@@ -47,7 +47,7 @@ const ReportPage = () => {
   // Fetch expired medications by month and year
   const fetchExpiredByMonth = async (month, year) => {
     try {
-      const response = await axios.get(`http://localhost:5009/api/expired-by-month?month=${month}&year=${year}`);
+      const response = await axios.get(`hhttps://backend-zltr.onrender.com/api/expired-by-month?month=${month}&year=${year}`);
       setExpiredByMonth(response.data);
     } catch (err) {
       setError("Failed to fetch expired medications by month");
