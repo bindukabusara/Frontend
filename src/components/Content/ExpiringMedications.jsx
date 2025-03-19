@@ -100,7 +100,7 @@ const ExpiringMedications = () => {
                       <tr key={medication._id}>
                         <td>
                           <img
-                            src={`http://localhost:5009/uploads/${medication.image}`}
+                            src={`https://backend-zltr.onrender.com/uploads/${medication.image}`}
                             alt={medication.name}
                             className="medication-image"
                           />
@@ -195,7 +195,7 @@ const ExpiringMedications = () => {
                       <tr key={medication._id}>
                         <td>
                           <img
-                            src={`http://localhost:5009/uploads/${medication.image}`}
+                            src={`https://backend-zltr.onrender.com/uploads/${medication.image}`}
                             alt={medication.name}
                             className="medication-image"
                           />
@@ -236,7 +236,7 @@ const ExpiringMedications = () => {
                       <tr key={medication._id}>
                         <td>
                           <img
-                            src={`http://localhost:5009/uploads/${medication.image}`}
+                            src={`https://backend-zltr.onrender.com/uploads/${medication.image}`}
                             alt={medication.name}
                             className="medication-image"
                           />
@@ -277,7 +277,7 @@ const ExpiringMedications = () => {
                       <tr key={medication._id}>
                         <td>
                           <img
-                            src={`http://localhost:5009/uploads/${medication.image}`}
+                            src={`https://backend-zltr.onrender.com/uploads/${medication.image}`}
                             alt={medication.name}
                             className="medication-image"
                           />
