@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from '../src/components/authentification/Login';
 import Sidebar from '../src/components/Pharmacy/Sidebar/Sidebar'
-import Dashboard from '../src/components/Content/Dashboard'
+import Dashboard from './components/Content/Dashboard';
 import MedicationStore from './components/Content/MedicationStore';
 import ExpiringMedications from "./components/Content/ExpiringMedications";
 import Inventory from "./components/Content/Inventory";
