@@ -1,0 +1,337 @@
+/* Custom Table Styling */
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+
+  .custom-table th,
+  .custom-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .custom-table th {
+    background-color: #02487a;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+
+  .custom-table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  .custom-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  /* Medication Image Styling */
+  .medication-image {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    object-fit: cover;
+  }
+
+  /* Button Styling */
+  .btn-primary {
+    background-color:#02487a;
+    border-color: #02487a;
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .btn-primary:hover {
+    background-color: #02487a;;
+    border-color:#02487a;;
+  }
+
+  .btn-warning {
+    background-color: #f3b407;
+    border-color: #f3b407;
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .btn-warning:hover {
+    background-color: #e0a800;
+    border-color: #d39e00;
+  }
+
+  .btn-danger {
+    background-color: #d70a1f;
+    border-color: #d70a1f;
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+  }
+
+  /* Layout Styling */
+  .medication-store-container {
+    display: flex;
+    height: 100vh;
+    background-color: #f8f9fa;
+  }
+
+  .main-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #fff;
+    margin-left: 250px; /* Adjust based on sidebar width */
+  }
+
+  /* Search Bar Styling */
+  .search-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .search-bar input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  .search-bar button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  /* Modal Styling */
+  .modal-header {
+    background-color: #02487a;
+    color: #fff;
+  }
+
+  .modal-title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .modal-body {
+    padding: 20px;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .main-content {
+      margin-left: 0;
+    }
+
+    .custom-table th,
+    .custom-table td {
+      padding: 8px;
+      font-size: 12px;
+    }
+
+    .medication-image {
+      width: 40px;
+      height: 40px;
+    }
+
+    .btn-primary,
+    .btn-warning,
+    .btn-danger {
+      font-size: 12px;
+      padding: 6px 12px;
+    }
+  }
+
+  /* Icon Styling */
+.btn-warning .fa-edit,
+.btn-danger .fa-trash {
+  font-size: 16px; /* Adjust icon size */
+}
+
+.btn-warning:hover .fa-edit,
+.btn-danger:hover .fa-trash {
+  color: #fff; /* Ensure icons stay white on hover */
+}
+
+/* Custom Table Styling */
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+
+  .custom-table th,
+  .custom-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .custom-table th {
+    background-color: #02487a;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+
+  .custom-table tbody tr {
+    transition: all 0.3s ease;
+  }
+
+  .custom-table tbody tr:hover {
+    background-color: #f5f5f5;
+    transform: scale(1.02);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .custom-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  .custom-table img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+
+  .action-buttons {
+    display: flex;
+    gap: 10px;
+  }
+
+  .action-buttons button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .action-buttons button:hover {
+    opacity: 0.8;
+  }
+
+  .edit-button {
+    background-color: #FFC107;
+    color: #fff;
+  }
+
+  .delete-button {
+    background-color: #DC3545;
+    color: #fff;
+  }
+
+
+/* Custom Table Styling */
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0; /* Remove margin-top */
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  max-height: 400px; /* Adjust this value to fit your content area */
+  overflow-y: auto; /* Add scrollbar only if necessary */
+}
+
+.custom-table th,
+.custom-table td {
+  padding: 8px; /* Reduced padding */
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  font-size: 12px; /* Reduced font size */
+}
+
+.custom-table th {
+  background-color: #02487a;
+  color: #fff;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.custom-table tbody tr {
+  transition: all 0.3s ease;
+}
+
+.custom-table tbody tr:hover {
+  background-color: #f5f5f5;
+  transform: scale(1.02);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.custom-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.custom-table img {
+  width: 40px; /* Reduced image size */
+  height: 40px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px; /* Reduced gap */
+}
+
+.action-buttons button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px; /* Reduced button size */
+  height: 30px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.action-buttons button:hover {
+  opacity: 0.8;
+}
+
+.edit-button {
+  background-color: #FFC107;
+  color: #fff;
+}
+
+.delete-button {
+  background-color: #DC3545;
+  color: #fff;
+}
+
+/* Ensure the table fits within the container */
+
+
+/* Adjust the search bar and button row */
+.search-bar {
+  margin-bottom: 10px; /* Reduced margin-bottom */
+}
+
+/* Adjust the container margin */
+.medication-store-container {
+  margin-top: 0; /* Remove margin-top */
+}

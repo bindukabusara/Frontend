@@ -1,0 +1,95 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.signup-container {
+    text-align: center;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 400px;
+}
+
+.signup-container h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #008CBA;
+}
+
+.signup-container p {
+    font-size: 16px;
+    margin-bottom: 30px;
+    color: #555;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.button-container a {
+    flex: 1;
+    text-decoration: none;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-container a .icon {
+    margin-right: 8px;
+}
+
+.button-patient {
+    background-color: #008CBA;
+}
+
+.button-patient:hover {
+    background-color: #006f99;
+}
+
+.button-pharmacist {
+    background-color: #4CAF50;
+}
+
+.button-pharmacist:hover {
+    background-color: #3e8e41;
+}
+
+footer {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #888;
+}
+
+footer a {
+    color: #008CBA;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer a .icon {
+    margin-right: 8px;
+}

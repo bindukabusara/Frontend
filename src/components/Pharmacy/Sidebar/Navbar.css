@@ -1,0 +1,118 @@
+/* Navbar Styles */
+.navbar {
+  background-color: #fff; /* Updated navbar color */
+  color: #fff; /* White text */
+  padding: 5px 10px;
+  box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+
+.navbar-logo img {
+  height: 70px; /* Adjust logo size */
+}
+
+/* Logout option styling */
+.navbar-actions {
+  margin-left: auto; /* Push logout to the extreme right */
+  display: flex;
+  align-items: center;
+}
+
+.navbar-actions .logout-option {
+  color: #000000;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between icon and text */
+  transition: opacity 0.3s ease;
+}
+
+.navbar-actions .logout-option:hover {
+  opacity: 0.8; /* Slight fade on hover */
+}
+
+/* Logout icon styling */
+.navbar-actions .logout-option svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Logout Popup Overlay */
+.logout-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
+}
+
+/* Logout Popup */
+.logout-popup {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 300px;
+  width: 100%;
+}
+
+.logout-popup h3 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.popup-buttons button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.popup-buttons .confirm-button {
+  background-color: #ff4d4d; /* Red button */
+  color: #fff;
+}
+
+.popup-buttons .confirm-button:hover {
+  background-color: #e60000; /* Darker red on hover */
+}
+
+.popup-buttons .cancel-button {
+  background-color: #1D328D; /* Updated navbar color */
+  color: #fff;
+}
+
+.popup-buttons .cancel-button:hover {
+  background-color: #16236b; /* Darker blue on hover */
+}

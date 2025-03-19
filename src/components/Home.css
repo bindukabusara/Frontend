@@ -1,0 +1,141 @@
+/* General Styles */
+.home-page {
+  font-family: "Arial", sans-serif;
+  color: #333;
+  background-color: #ffffff; /* Dominant white background */
+}
+
+/* Navbar */
+.navbar {
+  padding: 5px 0; /* Further reduced padding for a slimmer navbar */
+  border-bottom: 1px solid #e0e0e0; /* Light border for separation */
+}
+
+.navbar {
+  height: 80px; /* Adjust the height as needed */
+  padding: 5px 20px; /* Reduce padding if necessary */
+  line-height: 20px; /* Align content properly */
+}
+.logo {
+  height: 25px; /* Further reduced logo size */
+}
+
+.nav-link {
+  font-size: 0.85rem; /* Smaller font size */
+  color: #333 !important;
+  margin: 0 4px; /* Reduced margin between links */
+  padding: 2px 2px; /* Reduced padding inside links */
+}
+
+.nav-link:hover {
+  color: #007bff !important; /* Brand accent color */
+}
+
+.nav-button {
+  font-size: 0.85rem; /* Smaller font size */
+  padding: 4px 8px; /* Smaller padding */
+  margin-left: 8px; /* Reduced margin between buttons */
+}
+
+/* Hero Section */
+.hero-section {
+  padding: 40px 0; /* Reduced padding */
+}
+
+.hero-title {
+  font-size: 2.5rem; /* Smaller font size */
+  font-weight: bold;
+  color: #333;
+}
+
+.brand-name {
+  color: #007bff; /* Brand accent color */
+}
+
+.hero-subtitle {
+  font-size: 1.1rem; /* Smaller font size */
+  color: #555;
+  margin: 20px 0;
+}
+
+.cta-button {
+  margin-top: 20px;
+  padding: 10px 30px;
+  font-size: 1rem; /* Smaller font size */
+}
+
+.hero-image {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Features Section */
+.features-section {
+  padding: 40px 0; /* Reduced padding */
+  background-color: #f8f9fa; /* Light gray background */
+}
+
+.section-title {
+  font-size: 2rem; /* Smaller font size */
+  font-weight: bold;
+  color: #333;
+}
+
+.feature-card {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  height: 100%; /* Ensure all cards have the same height */
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+}
+
+.feature-icon {
+  font-size: 2rem; /* Smaller icon size */
+  color: #007bff;
+  margin-bottom: 15px; /* Reduced margin */
+}
+
+.feature-title {
+  font-size: 1.25rem; /* Smaller font size */
+  font-weight: bold;
+  color: #333;
+}
+
+.feature-description {
+  font-size: 0.9rem; /* Smaller font size */
+  color: #555;
+}
+
+/* Call-to-Action Section */
+.cta-section {
+  padding: 40px 0; /* Reduced padding */
+}
+
+.cta-title {
+  font-size: 2rem; /* Smaller font size */
+  font-weight: bold;
+  color: #333;
+}
+
+.cta-subtitle {
+  font-size: 1.1rem; /* Smaller font size */
+  color: #555;
+  margin: 20px 0;
+}
+
+/* Footer Section */
+.footer {
+  padding: 15px 0; /* Reduced padding */
+  background-color: #f8f9fa; /* Light gray background */
+  border-top: 1px solid #ffffff; /* Light border for separation */
+}
+
+.footer-text {
+  font-size: 0.8rem; /* Smaller font size */
+  color: #555;
+  margin: 0;
+}

@@ -1,0 +1,223 @@
+.dashboard-container {
+    display: flex;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+.dashboard-card {
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: 10px;
+    transition: transform 0.2s;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.card-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2D6187;
+    margin: 10px 0;
+}
+
+.view-details {
+    display: block;
+    margin-top: 10px;
+    color: #2D6187;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.view-details:hover {
+    text-decoration: underline;
+}
+
+.notifications-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.notifications-list li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    color: #555;
+}
+
+.notifications-list li:last-child {
+    border-bottom: none;
+}
+
+/* Chart Styling */
+.recharts-wrapper {
+    margin: 0 auto;
+}
+
+.dashboard-container {
+    display: flex;
+  }
+
+  .main-content {
+    flex: 1;
+    padding: 20px;
+  }
+
+  .dashboard-card {
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-value {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  /* Red background for expired medications card */
+  .expired-cards {
+    background-color: #ff4444; /* Red background */
+    color: white; /* White text for better contrast */
+  }
+
+  .expired-card .card-title,
+  .expired-card .card-value {
+    color: white; /* Ensure text is white */
+  }
+
+  .Expiring {
+    background-color: #ffb444; /* Red background */
+    color: white; /* White text for better contrast */
+  }
+  .Expiring .card-title,
+  .Expiring .card-value {
+    color: white; /* Ensure text is white */
+  }
+
+  .card-icon {
+    margin-right: 10px; /* Add spacing between the icon and text */
+    font-size: 1.5rem; /* Adjust icon size */
+    color: #007bff; /* Change icon color */
+  }
+  .card-ico {
+    margin-right: 10px; /* Add spacing between the icon and text */
+    font-size: 1.5rem; /* Adjust icon size */
+    color: #efd807; /* Change icon color */
+  }
+  .card-ic {
+    margin-right: 10px; /* Add spacing between the icon and text */
+    font-size: 1.5rem; /* Adjust icon size */
+    color: #ff2600; /* Change icon color */
+  }
+
+  /* Dashboard Container */
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+/* Main Content */
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  margin-left: 250px; /* Adjust based on sidebar width */
+}
+
+/* Dashboard Cards */
+.dashboard-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  height: 150px; /* Ensures all cards have the same height */
+}
+
+/* Card Titles */
+.dashboard-card .card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Card Icons */
+.card-icon, .card-ico, .card-ic {
+  font-size: 1.5rem;
+  color: #02487a;
+}
+
+/* Card Values */
+.card-value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #555;
+}
+
+/* Expired Medication Card Styling */
+.expired {
+  background: #ffebee;
+  border: 1px solid #e57373;
+}
+
+.expired .card-value {
+  color: #d32f2f;
+}
+
+.expire {
+  background: #d3800367;
+  border: 1px solid #c4ad00;
+}
+
+.expire .card-value {
+  color: #ffffff;
+}
+
+/* Ensure Cards are Equal Height */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.row > .col-md-4 {
+  display: flex;
+}
+
+.dashboard-card {
+  flex: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .main-content {
+    margin-left: 0;
+  }
+
+  .row {
+    flex-direction: column;
+  }
+
+  .dashboard-card {
+    width: 100%;
+    height: auto;
+  }
+}
+

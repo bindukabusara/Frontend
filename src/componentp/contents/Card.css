@@ -1,0 +1,93 @@
+/* General Styles */
+.orders-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .main-content {
+    flex-grow: 1;
+    padding: 20px;
+    margin-left: 250px; /* Adjust based on your sidebar width */
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #02487a;
+  }
+
+  /* Order Card Styles */
+  .order-card {
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #fff;
+    border: 1px solid #ddd;
+  }
+
+  .order-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .order-card .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #02487a;
+    margin-bottom: 15px;
+  }
+
+  .order-card .card-text {
+    font-size: 14px;
+    color: #555;
+  }
+
+  .order-card .card-text strong {
+    color: #333;
+  }
+
+  /* Status Styles */
+  .status-pending {
+    color: #ffc107; /* Yellow for pending */
+  }
+
+  .status-completed {
+    color: #28a745; /* Green for completed */
+  }
+
+  .status-cancelled {
+    color: #dc3545; /* Red for cancelled */
+  }
+
+  /* View Details Button */
+  .view-details-btn {
+    background-color: #02487a;
+    border: none;
+    font-size: 14px;
+    font-weight: bold;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+    color: #fff;
+  }
+
+  .view-details-btn:hover {
+    background-color: #03355d;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .main-content {
+      margin-left: 0; /* Sidebar collapses on smaller screens */
+      padding: 10px;
+    }
+
+    .order-card {
+      height: auto;
+    }
+  }

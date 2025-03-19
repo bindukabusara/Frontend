@@ -1,0 +1,128 @@
+.expiring-medications-container {
+    display: flex;
+  }
+
+  .main-content {
+    flex: 1;
+    padding: 20px;
+  }
+
+  .medication-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  .expiring-medications-container {
+    display: flex;
+  }
+
+  .main-content {
+    flex: 1;
+    padding: 10px;
+    background-color: #f8f9fa;
+  }
+
+  /* Card styling */
+  .expired-card {
+    background-color: #ff4444; /* Red background for expired medications */
+    color: white; /* White text */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .expiring-soon-card {
+    background-color: #ffb444; /* Orange background for expiring soon medications */
+    color: white; /* White text */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .expiring-three-months-card {
+    background-color: #44b4ff; /* Blue background for expiring in three months medications */
+    color: white; /* White text */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Dropdown styling */
+  .dropdown-toggle {
+    width: 100%;
+    text-align: left;
+    background-color: transparent;
+    border: none;
+  }
+
+  .dropdown-menu {
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  .dropdown-item {
+    padding: 10px;
+    color: #333;
+  }
+
+  .dropdown-item:hover {
+    background-color: #f8f9fa;
+  }
+
+  /* Description styling */
+  p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #fff;
+  }
+
+  .expiring-medications-container {
+    display: flex;
+  }
+
+  .main-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #efeeee;
+  }
+
+  /* Card styling */
+  .expired-card,
+  .expiring-soon-card,
+  .expiring-three-months-card {
+    background-color: #ffffff; /* White background for cards */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+
+  /* Button styling */
+  .custom-button {
+    background-color: #02487a; /* Blue background */
+    color: white; /* White text */
+    font-weight: bold; /* Bold text */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    width: 100%;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease;
+  }
+
+  .custom-button:hover {
+    background-color: #1a4661; /* Darker blue on hover */
+  }
+
+  /* Icon styling */
+  .button-icon {
+    margin-right: 10px;
+    font-size: 18px;
+  }
+
+  /* Description styling */
+  p {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #555;
+  }
