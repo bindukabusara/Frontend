@@ -1,12 +1,15 @@
 import { useState } from "react";
-import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Alert, InputGroup } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa"; // Icons
+import "./Signup.css"; // Import CSS file
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [showPassword, setShowPassword] = useState(false); // State for password visibility
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
@@ -39,9 +42,9 @@ const Login = () => {
     };
 
     return (
-        <Container className="d-flex justify-content-center align-items-center vh-100">
-            <Row className="shadow-lg rounded bg-white">
-                <Col md={5} className="p-5 bg-light text-dark">
+        <Container className="signup-page">
+            <Row className="signup-container">
+                <Col md={5} className="signup-left">
                     <h2 className="fw-bold">Welcome back</h2>
                     <p>Log in to your account to continue.</p>
                 </Col>
@@ -51,7 +54,7 @@ const Login = () => {
                         {error && <Alert variant="danger">{error}</Alert>}
 
                         <Form.Group className="mb-3">
-                            <Form.Label>Email Address</Form.Label>
+                            <Form.Label><FaEnvelope className="icon" /> Email Address</Form.Label>
                             <Form.Control
                                 type="email"
                                 placeholder="Enter email"
@@ -62,14 +65,22 @@ const Login = () => {
                         </Form.Group>
 
                         <Form.Group className="mb-3">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control
-                                type="password"
-                                placeholder="Enter password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
-                            />
+                            <Form.Label><FaLock className="icon" /> Password</Form.Label>
+                            <InputGroup>
+                                <Form.Control
+                                    type={showPassword ? "text" : "password"}
+                                    placeholder="Enter password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                />
+                                <Button
+                                    variant="outline-secondary"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                >
+                                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                                </Button>
+                            </InputGroup>
                         </Form.Group>
 
                         <Button type="submit" variant="primary" className="w-100">Login</Button>
