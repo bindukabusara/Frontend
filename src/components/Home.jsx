@@ -65,7 +65,7 @@ const Home = () => {
       </Navbar>
 
       {/* Hero Section */}
-      <section className="hero-section">
+      <section className="hero-section"><br></br><br></br><br></br><br></br>
         <Container>
           <Row className="align-items-center">
             <Col md={6}>
