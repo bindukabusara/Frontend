@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Table, Alert, Button, Card, Form } from "react-bootstrap";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationTriangle, faClock, faCalendarAlt, faSearch } from "@fortawesome/free-solid-svg-icons";
-import Sidebar from '../Pharmacy/Sidebar/Sidebar';
+import Sidebar from "../Pharmacy/Sidebar/sidebar";
 import "./ExpiringMedications.css";
 import Navbar from "../Pharmacy/Sidebar/Navbar";
 

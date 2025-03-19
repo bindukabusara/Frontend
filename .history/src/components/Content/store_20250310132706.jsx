@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import { Container, Row, Col, Form, Button, Table } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Container, Row, Col, Form, Button, Table, Alert } from "react-bootstrap";
 import axios from "axios";
-import Sidebar from '../Pharmacy/Sidebar/Sidebar';
+import Sidebar from "../Pharmacy/Sidebar/sidebar";
 import "./MedicationStore.css";
 import Navbar from "../Pharmacy/Sidebar/Navbar";
 

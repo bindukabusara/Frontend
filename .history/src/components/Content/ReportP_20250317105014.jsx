@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Button, Table, Alert, Form, Modal } from "react-bootstrap";
 import axios from "axios";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Legend, Cell, PieChart, Pie } from "recharts";
-import Sidebar from '../Pharmacy/Sidebar/Sidebar';
+import Sidebar from "../Pharmacy/Sidebar/sidebar";
 import Navbar from "../Pharmacy/Sidebar/Navbar";
 import "./Report.css"; // Custom CSS for the report page
 

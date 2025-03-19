@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Form, Button, Table, Alert, Modal } from "react-bootstrap";
 import axios from "axios";
 import { FaEdit, FaTrash } from "react-icons/fa";
@@ -44,7 +44,7 @@ const MedicationStore = () => {
       setMedications(validMedications);
       setFilteredMedications(validMedications); // Initialize filtered medications with valid medications
     } catch (err) {
-      setError("Failed to fetch medications", err);
+      setError("Failed to fetch medications");
     }
   };
 
@@ -101,7 +101,7 @@ const MedicationStore = () => {
       resetForm();
       setShowModal(false);
     } catch (err) {
-      setError("Failed to save medication", err);
+      setError("Failed to save medication");
     }
   };
 
@@ -125,7 +125,7 @@ const MedicationStore = () => {
       setSuccess("Medication deleted successfully");
       fetchMedications(); // Refresh the list after deletion
     } catch (err) {
-      setError("Failed to delete medication", err);
+      setError("Failed to delete medication");
     }
   };
 

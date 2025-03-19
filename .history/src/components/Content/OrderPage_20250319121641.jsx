@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Container, Table, Button, Alert, Modal, Form } from "react-bootstrap";
+import { Container, Row, Col, Table, Button, Alert, Modal, Form } from "react-bootstrap";
 import axios from "axios";
 import Sidebar from '../Pharmacy/Sidebar/Sidebar';
 import Navbar from "../Pharmacy/Sidebar/Navbar";

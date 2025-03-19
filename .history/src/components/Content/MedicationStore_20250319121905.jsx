@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Container, Row, Col, Form, Button, Table, Alert, Modal } from "react-bootstrap";
 import axios from "axios";
 import { FaEdit, FaTrash } from "react-icons/fa";
-import Sidebar from "../Pharmacy/Sidebar/sidebar";
-import "./Inventory.css";
+import Sidebar from '../Pharmacy/Sidebar/Sidebar';
+import "./MedicationStore.css";
+import Navbar from "../Pharmacy/Sidebar/Navbar";
 
-const Inventory = () => {
+const MedicationStore = () => {
   const [medications, setMedications] = useState([]);
+  const [filteredMedications, setFilteredMedications] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState("");
@@ -18,29 +20,60 @@ const Inventory = () => {
   const [editId, setEditId] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [expireDate, setExpireDate] = useState("");
+  const [location, setLocation] = useState("");
+  const [currentPage, setCurrentPage] = useState(1); // Track current page
+  const [itemsPerPage] = useState(5); // Number of items per page
+  const [notification, setNotification] = useState(""); // Notification state
 
   useEffect(() => {
     fetchMedications();
+    fetchOrders(); // Fetch orders when the component mounts
   }, []);
 
+  // Fetch all medications and filter out expired ones
   const fetchMedications = async () => {
     try {
       const response = await axios.get("http://localhost:5009/api/medications");
-      setMedications(response.data);
+      const currentDate = new Date();
+
+      // Filter out expired medications
+      const validMedications = response.data.filter(
+        (medication) => new Date(medication.expireDate) > currentDate
+      );
+
+      setMedications(validMedications);
+      setFilteredMedications(validMedications); // Initialize filtered medications with valid medications
     } catch (err) {
-      setError("Failed to fetch medications");
+      setError("Failed to fetch medications", err);
     }
   };
 
-  const handleSearch = async () => {
+  // Fetch orders to check for new notifications
+  const fetchOrders = async () => {
     try {
-      const response = await axios.get(`http://localhost:5009/api/medications/search?query=${searchQuery}`);
-      setMedications(response.data);
-    } catch (err) {
-      setError("Failed to search medications");
+      const response = await axios.get("http://localhost:5009/api/orders");
+      if (response.data.length > 0) {
+        setNotification("New order placed!");
+      }
+    } catch (error) {
+      console.error("Error fetching orders:", error);
     }
   };
 
+  // Handle search input change
+  const handleSearch = (e) => {
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+
+    // Filter medications based on the search query
+    const filtered = medications.filter((medication) =>
+      medication.name.toLowerCase().includes(query)
+    );
+    setFilteredMedications(filtered); // Update filtered medications
+    setCurrentPage(1); // Reset to the first page when searching
+  };
+
+  // Handle form submission for adding/editing medication
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -50,6 +83,7 @@ const Inventory = () => {
     formData.append("price", price);
     formData.append("image", image);
     formData.append("expireDate", expireDate);
+    formData.append("location", location);
 
     try {
       if (editId) {
@@ -63,14 +97,15 @@ const Inventory = () => {
         });
         setSuccess("Medication added successfully");
       }
-      fetchMedications();
+      fetchMedications(); // Refresh the list after adding/editing
       resetForm();
       setShowModal(false);
     } catch (err) {
-      setError("Failed to save medication");
+      setError("Failed to save medication", err);
     }
   };
 
+  // Handle editing a medication
   const handleEdit = (medication) => {
     setName(medication.name);
     setDescription(medication.description);
@@ -78,20 +113,23 @@ const Inventory = () => {
     setPrice(medication.price);
     setImage(medication.image);
     setExpireDate(medication.expireDate);
+    setLocation(medication.location);
     setEditId(medication._id);
     setShowModal(true);
   };
 
+  // Handle deleting a medication
   const handleDelete = async (id) => {
     try {
       await axios.delete(`http://localhost:5009/api/medications/${id}`);
       setSuccess("Medication deleted successfully");
-      fetchMedications();
+      fetchMedications(); // Refresh the list after deletion
     } catch (err) {
-      setError("Failed to delete medication");
+      setError("Failed to delete medication", err);
     }
   };
 
+  // Reset the form fields
   const resetForm = () => {
     setName("");
     setDescription("");
@@ -99,36 +137,52 @@ const Inventory = () => {
     setPrice("");
     setImage(null);
     setExpireDate("");
+    setLocation("");
     setEditId(null);
   };
 
+  // Open the modal for adding a new medication
   const handleAddMedication = () => {
     resetForm();
     setShowModal(true);
   };
 
+  // Pagination logic
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredMedications.slice(indexOfFirstItem, indexOfLastItem);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
-    <div className="inventory-container">
+    <div className="medication-store-container">
+      <Navbar />
       <Sidebar />
       <div className="main-content">
         <Container>
+          {/* Notification Alert */}
+          {notification && (
+            <Alert variant="info" onClose={() => setNotification("")} dismissible>
+              {notification}
+            </Alert>
+          )}
+
           <Row className="mt-5 align-items-center">
+            <h3>Store</h3>
             <Col md={6}>
               <div className="search-bar">
                 <Form.Control
                   type="text"
                   placeholder="Search by name"
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={handleSearch}
                 />
-                <Button variant="secondary" onClick={handleSearch}>
-                  Search
-                </Button>
               </div>
             </Col>
             <Col md={6} className="text-end">
               <Button variant="primary" onClick={handleAddMedication}>
-                Add Medication
+                <strong>Add Medication</strong>
               </Button>
             </Col>
           </Row>
@@ -141,13 +195,14 @@ const Inventory = () => {
                     <th>Name</th>
                     <th>Description</th>
                     <th>Quantity</th>
-                    <th>Price</th>
+                    <th>Unit Price</th>
                     <th>Expire Date</th>
+                    <th>Location</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {medications.map((medication) => (
+                  {currentItems.map((medication) => (
                     <tr key={medication._id}>
                       <td>
                         <img
@@ -161,6 +216,7 @@ const Inventory = () => {
                       <td>{medication.quantity}</td>
                       <td>{medication.price}</td>
                       <td>{new Date(medication.expireDate).toLocaleDateString()}</td>
+                      <td>{medication.location}</td>
                       <td>
                         <div style={{ display: "flex", gap: "8px" }}>
                           <Button
@@ -183,6 +239,27 @@ const Inventory = () => {
                   ))}
                 </tbody>
               </Table>
+
+              {/* Pagination Controls */}
+              <div className="d-flex justify-content-center mt-3">
+                <Button
+                  variant="secondary"
+                  onClick={() => paginate(currentPage - 1)}
+                  disabled={currentPage === 1}
+                >
+                  Previous
+                </Button>
+                <span className="mx-3 align-self-center">
+                  Page {currentPage} of {Math.ceil(filteredMedications.length / itemsPerPage)}
+                </span>
+                <Button
+                  variant="secondary"
+                  onClick={() => paginate(currentPage + 1)}
+                  disabled={currentPage === Math.ceil(filteredMedications.length / itemsPerPage)}
+                >
+                  Next
+                </Button>
+              </div>
             </Col>
           </Row>
         </Container>
@@ -226,7 +303,7 @@ const Inventory = () => {
               />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Price</Form.Label>
+              <Form.Label>Unit Price</Form.Label>
               <Form.Control
                 type="number"
                 placeholder="Enter price"
@@ -240,7 +317,6 @@ const Inventory = () => {
               <Form.Control
                 type="file"
                 onChange={(e) => setImage(e.target.files[0])}
-                required={!editId}
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -249,6 +325,16 @@ const Inventory = () => {
                 type="date"
                 value={expireDate}
                 onChange={(e) => setExpireDate(e.target.value)}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Location</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter location"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
                 required
               />
             </Form.Group>
@@ -262,4 +348,4 @@ const Inventory = () => {
   );
 };
 
-export default Inventory;
+export default MedicationStore;
