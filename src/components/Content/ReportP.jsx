@@ -64,6 +64,21 @@ const ReportPage = () => {
     }
   };
 
+  const handleDeleteExpiredMedications = async () => {
+    if (!window.confirm("Are you sure you want to delete all expired medications?")) {
+      return;
+    }
+
+    try {
+      const response = await axios.delete("https://backend-zltr.onrender.com/api/medications/delete-expired");
+      alert(response.data.message); // Show success message
+      fetchReportData(); // Refresh the report data
+    } catch (err) {
+      setError("Failed to delete expired medications");
+      console.error("Error deleting expired medications:", err.response?.data || err.message);
+    }
+  };
+
   const fetchMedicationsByCategory = async (category) => {
     try {
       let endpoint = "";
@@ -169,6 +184,13 @@ const ReportPage = () => {
                 </div>
                 <div className="card-value-section" style={{ backgroundColor: "#ffebee" }}>
                   <Card.Text className="card-value">{expiredMedications}</Card.Text>
+                  <Button
+                    variant="danger"
+                    className="mt-2"
+                    onClick={handleDeleteExpiredMedications}
+                  >
+                    Delete All
+                  </Button>
                 </div>
               </Card>
             </Col>
@@ -305,54 +327,90 @@ const ReportPage = () => {
                       <td>Total Medications</td>
                       <td>{totalMedications}</td>
                       <td>
-                      <center><Button variant="info" onClick={() => fetchMedicationsByCategory("Total Medications")}style={{ backgroundColor: "#02487a", color: "white" }}>
-                          View
-                        </Button></center>
+                        <center>
+                          <Button
+                            variant="info"
+                            onClick={() => fetchMedicationsByCategory("Total Medications")}
+                            style={{ backgroundColor: "#02487a", color: "white", marginRight: "10px" }}
+                          >
+                            View
+                          </Button>
+                        </center>
                       </td>
                     </tr>
                     <tr>
                       <td>Expiring Soon (Less than 1 week)</td>
                       <td>{expiringSoon}</td>
                       <td>
-                      <center><Button variant="info" onClick={() => fetchMedicationsByCategory("Expiring Soon")} style={{ backgroundColor: "#02487a", color: "white" }}>
-                          View
-                        </Button></center>
+                        <center>
+                          <Button
+                            variant="info"
+                            onClick={() => fetchMedicationsByCategory("Expiring Soon")}
+                            style={{ backgroundColor: "#02487a", color: "white", marginRight: "10px" }}
+                          >
+                            View
+                          </Button>
+                        </center>
                       </td>
                     </tr>
                     <tr>
                       <td>Expired Medications</td>
                       <td>{expiredMedications}</td>
                       <td>
-                        <center><Button variant="info" onClick={() => fetchMedicationsByCategory("Expired Medications")}style={{ backgroundColor: "#02487a", color: "white" }}>
-                          View
-                        </Button></center>
+                        <center>
+                          <Button
+                            variant="info"
+                            onClick={() => fetchMedicationsByCategory("Expired Medications")}
+                            style={{ backgroundColor: "#02487a", color: "white", marginRight: "10px" }}
+                          >
+                            View
+                          </Button>
+                        </center>
                       </td>
                     </tr>
                     <tr>
                       <td>Expiring in 3 Months</td>
                       <td>{expiringInThreeMonths}</td>
                       <td>
-                        <center><Button variant="info" onClick={() => fetchMedicationsByCategory("Expiring in 3 Months")} style={{ backgroundColor: "#02487a", color: "white" }}>
-                          View
-                        </Button></center>
+                        <center>
+                          <Button
+                            variant="info"
+                            onClick={() => fetchMedicationsByCategory("Expiring in 3 Months")}
+                            style={{ backgroundColor: "#02487a", color: "white", marginRight: "10px" }}
+                          >
+                            View
+                          </Button>
+                        </center>
                       </td>
                     </tr>
                     <tr>
                       <td>Low Quantity Medications</td>
                       <td>{lowQuantityMedications}</td>
                       <td>
-                        <center><Button variant="info" onClick={() => fetchMedicationsByCategory("Low Quantity Medications")} style={{ backgroundColor: "#02487a", color: "white" }}>
-                          View
-                        </Button></center>
+                        <center>
+                          <Button
+                            variant="info"
+                            onClick={() => fetchMedicationsByCategory("Low Quantity Medications")}
+                            style={{ backgroundColor: "#02487a", color: "white", marginRight: "10px" }}
+                          >
+                            View
+                          </Button>
+                        </center>
                       </td>
                     </tr>
                     <tr>
                       <td>Non-Expired Medications in Stock</td>
                       <td>{nonExpiredMedicationsInStock}</td>
                       <td>
-                        <center><Button variant="info" onClick={() => fetchMedicationsByCategory("Non-Expired Medications in Stock")} style={{ backgroundColor: "#02487a", color: "white" }}>
-                          View
-                        </Button></center>
+                        <center>
+                          <Button
+                            variant="info"
+                            onClick={() => fetchMedicationsByCategory("Non-Expired Medications in Stock")}
+                            style={{ backgroundColor: "#02487a", color: "white", marginRight: "10px" }}
+                          >
+                            View
+                          </Button>
+                        </center>
                       </td>
                     </tr>
                   </tbody>
@@ -382,9 +440,9 @@ const ReportPage = () => {
             <Table striped bordered hover>
               <thead>
                 <tr>
-                <th style={{ backgroundColor: "#02487a", color: "white" }}>Name</th>
-                <th style={{ backgroundColor: "#02487a", color: "white" }}>Quantity</th>
-                <th style={{ backgroundColor: "#02487a", color: "white" }}>Expiration Date</th>
+                  <th style={{ backgroundColor: "#02487a", color: "white" }}>Name</th>
+                  <th style={{ backgroundColor: "#02487a", color: "white" }}>Quantity</th>
+                  <th style={{ backgroundColor: "#02487a", color: "white" }}>Expiration Date</th>
                 </tr>
               </thead>
               <tbody>
