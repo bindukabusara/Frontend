@@ -1,9 +1,9 @@
 import Home from './components/Home';
-import Signup from '../src/components/authentification/Signup'
+import Signup from './components/authentification/Signup';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Login from '../src/components/authentification/Login'
+import Login from './components/authentification/login';
 import Sidebar from './components/Pharmacy/Sidebar/sidebar';
 import Dashboard from './components/Content/Dashboard';
 import MedicationStore from './components/Content/MedicationStore';
@@ -15,6 +15,8 @@ import Settings from "./components/content/Settings";
 import OrderPage from './components/Content/OrderPage';
 
 // Patient side
+import SignupP from './componentp/auth/Signup';
+import LoginP from './componentp/auth/login';
 import Dash from './componentp/contents/Dash';
 import Card from './componentp/contents/Card';
 
@@ -44,7 +46,8 @@ function App() {
         <Route path='/settings' element={<Settings/>}/>
         <Route path='/order' element={<OrderPage/>}/>
 
-
+        <Route path='/sign' element={<SignupP/>}/>
+        <Route path='/loginp' element={<LoginP/>}/>
         <Route path='/dash' element={<Dash/>}/>
         <Route path='/card' element={<Card/>}/>
 

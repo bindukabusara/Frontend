@@ -1,5 +1,5 @@
 import Home from './components/Home';
-import Signup from '../src/components/authentification/Signup'
+import Signup from '../src/components/authentification/'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
