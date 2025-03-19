@@ -33,7 +33,7 @@ const Dashboard = () => {
       setExpiredMedications(expiredResponse.data.length);
 
       // Fetch medications expiring in 3 months
-      const expiringInThreeMonthsResponse = await axios.get("https://backend-zltr.onrender.com/expiring-in-three-months");
+      const expiringInThreeMonthsResponse = await axios.get("https://backend-zltr.onrender.com/api/expiring-in-three-months");
       setExpiringInThreeMonths(expiringInThreeMonthsResponse.data.length);
     } catch (err) {
       setError("Failed to fetch dashboard data");
