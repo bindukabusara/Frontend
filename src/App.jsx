@@ -21,6 +21,8 @@ import Store from './components/saler/Content/store';
 import DashboardS from './components/saler/Content/DashboardS';
 import ExpiringMedicationsS from "./components/saler/Content/ExpiringMedicationsS";
 import ReportS from "./components/saler/Content/ReportS";
+import OrderpageS from "./components/saler/Content/OrderPageS";
+
 
 
 function App() {
@@ -46,6 +48,7 @@ function App() {
         <Route path="/dashboardS" element={<DashboardS />} />
         <Route path="/expiring-medicationsS" element={<ExpiringMedicationsS />} />
         <Route path='/reportS' element={<ReportS/>}/>
+        <Route path='/orderS' element={<OrderpageS/>}/>
 
       </Routes>
     </BrowserRouter>

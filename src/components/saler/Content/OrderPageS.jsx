@@ -1,114 +1,206 @@
 import { useState, useEffect } from "react";
-import { Container, Table, Button, Modal, Form } from "react-bootstrap";
+import { Container, Table, Button, Alert, Modal, Form } from "react-bootstrap";
 import axios from "axios";
-//import Sidebar from "../Pharmacy/Sidebar/sidebar";
-//import Navbar from "../Pharmacy/Sidebar/Navbar";
-//import "./OrdersPage.css"; // Custom CSS for styling
+import SidebarS from "../Bar/SidebarS";
+import NavbarS from "../Bar/NavbarS";
+import "./OrdersS.css"; // Custom CSS for styling
 
-const OrdersPage = () => {
-  const [orders, setOrders] = useState([]);
-  const [selectedOrder, setSelectedOrder] = useState(null);
-  const [showModal, setShowModal] = useState(false);
-  const [instructions, setInstructions] = useState("");
+const AllCartsPage = () => {
+  const [carts, setCarts] = useState([]);
   const [error, setError] = useState("");
+  const [selectedCart, setSelectedCart] = useState(null); // Selected cart for the modal
+  const [showModal, setShowModal] = useState(false); // Control modal visibility
+  const [instructions, setInstructions] = useState(""); // Dosage instructions
+  const [additionalNotes, setAdditionalNotes] = useState(""); // Additional notes
+  const [timesToTake, setTimesToTake] = useState([""]); // Array of times to take the medication
 
-  // Fetch all orders
+  // Fetch all carts
   useEffect(() => {
-    const fetchOrders = async () => {
+    const fetchCarts = async () => {
       try {
-        const response = await axios.get("https://backend-zltr.onrender.com/api/cart/orders");
-        setOrders(response.data);
+        const response = await axios.get("https://backend-zltr.onrender.com/api/cart/all");
+        setCarts(response.data);
       } catch (err) {
-        setError("Failed to fetch orders");
-        console.error("Error fetching orders:", err);
+        setError("Failed to fetch carts");
+        console.error("Error fetching carts:", err);
       }
     };
 
-    fetchOrders();
+    fetchCarts();
   }, []);
 
-  // Handle providing instructions
-  const handleProvideInstructions = (order) => {
-    setSelectedOrder(order);
+  // Group carts by user
+  const groupCartsByUser = () => {
+    const groupedCarts = {};
+
+    carts.forEach((cart) => {
+      const userId = cart.userId?._id || "unknown";
+      if (!groupedCarts[userId]) {
+        groupedCarts[userId] = {
+          user: cart.userId,
+          carts: [],
+        };
+      }
+      groupedCarts[userId].carts.push(cart);
+    });
+
+    return groupedCarts;
+  };
+
+  // Handle opening the View Details modal
+  const handleViewDetails = (cart) => {
+    setSelectedCart(cart);
     setShowModal(true);
   };
 
-  // Handle saving instructions and updating medication quantity
+  // Handle adding a new time input field
+  const handleAddTime = () => {
+    setTimesToTake([...timesToTake, ""]); // Add a new empty time field
+  };
+
+  // Handle updating a specific time
+  const handleTimeChange = (index, value) => {
+    const updatedTimes = [...timesToTake];
+    updatedTimes[index] = value;
+    setTimesToTake(updatedTimes);
+  };
+
+  // Handle saving instructions
   const handleSaveInstructions = async () => {
     try {
-      // Save instructions (you can send this to the backend if needed)
-      console.log("Instructions:", instructions);
+      // Update the cart with instructions, additional notes, and times to take
+      const response = await axios.put(
+        `https://backend-zltr.onrender.com/api/cart/${selectedCart._id}/confirm`,
+        {
+          instructions,
+          additionalNotes,
+          timesToTake: timesToTake.filter((time) => time !== ""), // Save only non-empty times
+          status: "confirmed", // Update the status to confirmed
+        }
+      );
 
-      // Update medication quantity
-      await axios.put(`https://backend-zltr.onrender.com/api/medications/${selectedOrder.medicationId}/update-quantity`, {
-        quantity: selectedOrder.quantity,
-      });
+      // Update the local state with the updated cart
+      const updatedCarts = carts.map((cart) =>
+        cart._id === selectedCart._id ? response.data : cart
+      );
+      setCarts(updatedCarts);
 
-      // Close the modal and reset state
+      // Close the modal and reset the form
       setShowModal(false);
       setInstructions("");
-      setSelectedOrder(null);
-
-      // Refresh orders
-      const response = await axios.get("https://backend-zltr.onrender.com/api/cart/orders");
-      setOrders(response.data);
+      setAdditionalNotes("");
+      setTimesToTake([""]);
     } catch (err) {
-      setError("Failed to save instructions or update quantity");
-      console.error("Error:", err);
+      setError("Failed to save instructions");
+      console.error("Error saving instructions:", err);
     }
   };
 
+  const groupedCarts = groupCartsByUser();
+
   return (
-    <div className="orders-page-container">
-      <Navbar />
-      <Sidebar />
+    <div className="all-carts-page-container">
+      <NavbarS />
+      <SidebarS />
       <div className="main-content">
         <Container>
-          <h2>Patient Orders</h2>
+          <h2>All Carts</h2>
           {error && <Alert variant="danger">{error}</Alert>}
 
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>Patient Name</th>
+                <th>User</th>
                 <th>Medication</th>
                 <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th>Status</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {orders.map((order) => (
-                <tr key={order._id}>
-                  <td>{order.userId?.firstName} {order.userId?.lastName}</td>
-                  <td>{order.name}</td>
-                  <td>{order.quantity}</td>
-                  <td>
-                    <Button variant="primary" onClick={() => handleProvideInstructions(order)}>
-                      Provide Instructions
-                    </Button>
-                  </td>
+              {Object.keys(groupedCarts).length > 0 ? (
+                Object.keys(groupedCarts).map((userId) => {
+                  const userGroup = groupedCarts[userId];
+                  return userGroup.carts.map((cart, index) => (
+                    <tr key={cart._id}>
+                      {/* Display user name only in the first row */}
+                      {index === 0 ? (
+                        <td rowSpan={userGroup.carts.length}>
+                          {userGroup.user?.firstName} {userGroup.user?.lastName}
+                        </td>
+                      ) : null}
+                      <td>
+                        <img
+                          src={`http://localhost:5009/uploads/${cart.medicationId?.image}`}
+                          alt={cart.medicationId?.name}
+                          className="medication-image"
+                        />
+                        {cart.medicationId?.name}
+                      </td>
+                      <td>{cart.quantity}</td>
+                      <td>USh {cart.price}</td>
+                      <td>USh {cart.price * cart.quantity}</td>
+                      <td>{cart.status || "Pending"}</td>
+                      <td>
+                        <Button variant="primary" onClick={() => handleViewDetails(cart)}>
+                        Prescription
+                        </Button>
+                      </td>
+                    </tr>
+                  ));
+                })
+              ) : (
+                <tr>
+                  <td colSpan="7" className="text-center">No carts found</td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </Table>
         </Container>
       </div>
 
-      {/* Modal for providing instructions */}
+      {/* View Details Modal */}
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Provide Instructions</Modal.Title>
+          <Modal.Title>Medication Instructions</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
             <Form.Group className="mb-3">
-              <Form.Label>Instructions</Form.Label>
+              <Form.Label>Dosage Instructions</Form.Label>
               <Form.Control
                 as="textarea"
                 rows={3}
+                placeholder="Example: Take 2 tablets once a day after meals"
                 value={instructions}
                 onChange={(e) => setInstructions(e.target.value)}
-                placeholder="Enter instructions for the patient"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Times to Take</Form.Label>
+              {timesToTake.map((time, index) => (
+                <div key={index} className="mb-2">
+                  <Form.Control
+                    type="time"
+                    value={time}
+                    onChange={(e) => handleTimeChange(index, e.target.value)}
+                  />
+                </div>
+              ))}
+              <Button variant="secondary" onClick={handleAddTime}>
+                Add Another Time
+              </Button>
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Additional Notes</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                placeholder="Example: Avoid alcohol while taking this medication"
+                value={additionalNotes}
+                onChange={(e) => setAdditionalNotes(e.target.value)}
               />
             </Form.Group>
           </Form>
@@ -126,4 +218,4 @@ const OrdersPage = () => {
   );
 };
 
-export default OrdersPage;
+export default AllCartsPage;

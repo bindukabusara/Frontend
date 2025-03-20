@@ -58,7 +58,7 @@ function Sidebar() {
         <ul>
           <li>
             <NavLink
-              to="/ordersS"
+              to="/orderS"
               className={({ isActive }) => (isActive ? 'active' : '')} // Apply active class
             >
               <FontAwesomeIcon icon={faBox} /> Orders
