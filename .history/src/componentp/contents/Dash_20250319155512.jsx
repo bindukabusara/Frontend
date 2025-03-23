@@ -172,7 +172,7 @@ const OrderPage = () => {
             <NavbarP />
             <SidebarP />
             <div className="main-content">
-                <Container><br></br><br></br>
+                <Container>
                     <h2>Order Medications</h2>
                     <div className="user-info">
                         <h4>Hey, {user?.firstName} {user?.lastName}</h4>
