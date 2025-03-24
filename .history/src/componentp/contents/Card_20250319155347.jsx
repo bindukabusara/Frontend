@@ -105,7 +105,7 @@ const MyCartPage = () => {
                                             <Row>
                                                 <Col md={2}>
                                                     <img
-                                                        src={`https://backend-zltr.onrender.com/api/uploads/${item.image}`}
+                                                        src={`https://backend-zltr.onrender.com/uploads/${item.image}`}
                                                         alt={item.name}
                                                         className="cart-img"
                                                     />
