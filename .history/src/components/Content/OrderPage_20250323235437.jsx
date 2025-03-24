@@ -132,7 +132,6 @@ const AllCartsPage = () => {
                           {userGroup.user?.firstName} {userGroup.user?.lastName}
                         </td>
                       ) : null}
-
                       <tr>
                         <img
                           src={`http://backend-zltr.onrender.com/uploads/${cart.medicationId?.image}`}
