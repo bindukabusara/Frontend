@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { Container, Table, Button, Alert, Modal, Form } from "react-bootstrap";
 import axios from "axios";
-import Sidebar from '../Pharmacy/Sidebar/Sidebar';
-import Navbar from "../Pharmacy/Sidebar/Navbar";
-import "./order.css"; // Custom CSS for styling
+import SidebarS from "../Bar/SidebarS";
+import NavbarS from "../Bar/NavbarS";
+import "./OrdersS.css"; // Custom CSS for styling
 
 const AllCartsPage = () => {
   const [carts, setCarts] = useState([]);
@@ -100,8 +100,8 @@ const AllCartsPage = () => {
 
   return (
     <div className="all-carts-page-container">
-      <Navbar />
-      <Sidebar />
+      <NavbarS />
+      <SidebarS />
       <div className="main-content">
         <Container>
           <h2>All Carts</h2>
@@ -131,15 +131,14 @@ const AllCartsPage = () => {
                           {userGroup.user?.firstName} {userGroup.user?.lastName}
                         </td>
                       ) : null}
-
-                      <tr>
+                      <td>
                         <img
-                          src={`http://backend-zltr.onrender.com/uploads/${cart.medicationId?.image}`}
+                          src={`http://localhost:5009/uploads/${cart.medicationId?.image}`}
                           alt={cart.medicationId?.name}
                           className="medication-image"
                         />
                         {cart.medicationId?.name}
-                      </tr>
+                      </td>
                       <td>{cart.quantity}</td>
                       <td>USh {cart.price}</td>
                       <td>USh {cart.price * cart.quantity}</td>

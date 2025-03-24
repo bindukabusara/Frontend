@@ -93,7 +93,7 @@ const MedicationStore = () => {
                     <tr key={medication._id}>
                       <td>
                         <img
-                          src={`http://backend-zltr.onrender.com/uploads/${medication.image}`}
+                          src={`http://localhost:5009/uploads/${medication.image}`}
                           alt={medication.name}
                           className="medication-image"
                         />

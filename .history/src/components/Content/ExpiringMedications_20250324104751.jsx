@@ -236,7 +236,7 @@ const ExpiringMedications = () => {
                       <tr key={medication._id}>
                         <td>
                           <img
-                            src={`https://backend-zltr.onrender.com/uploads/${medication.image}`}
+                            src={`https://backend-zltr.onrender.com/api/uploads/${medication.image}`}
                             alt={medication.name}
                             className="medication-image"
                           />
@@ -277,7 +277,7 @@ const ExpiringMedications = () => {
                       <tr key={medication._id}>
                         <td>
                           <img
-                            src={`https://backend-zltr.onrender.com/uploads/${medication.image}`}
+                            src={`https://backend-zltr.onrender.com/api/uploads/${medication.image}`}
                             alt={medication.name}
                             className="medication-image"
                           />

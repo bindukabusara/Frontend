@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { Container, Row, Col, Form, Button, Table } from "react-bootstrap";
 import axios from "axios";
-import SidebarS from "../Bar/SidebarS";
-import "./store.css";
-import NavbarS from "../Bar/NavbarS";
+import Sidebar from '../Pharmacy/Sidebar/Sidebar';
+import "./MedicationStore.css";
+import Navbar from "../Pharmacy/Sidebar/Navbar";
 
 const MedicationStore = () => {
   const [medications, setMedications] = useState([]);
@@ -57,8 +57,8 @@ const MedicationStore = () => {
 
   return (
     <div className="medication-store-container">
-      <NavbarS />
-      <SidebarS />
+      <Navbar />
+      <Sidebar />
       <div className="main-content">
         <Container>
           <Row className="mt-5 align-items-center">
@@ -93,7 +93,7 @@ const MedicationStore = () => {
                     <tr key={medication._id}>
                       <td>
                         <img
-                          src={`http://backend-zltr.onrender.com/uploads/${medication.image}`}
+                          src={`http://localhost:5009/uploads/${medication.image}`}
                           alt={medication.name}
                           className="medication-image"
                         />

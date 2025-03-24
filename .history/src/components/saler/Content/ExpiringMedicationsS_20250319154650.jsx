@@ -3,9 +3,10 @@ import { Container, Row, Col, Table, Alert, Button, Card, Form } from "react-boo
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationTriangle, faClock, faCalendarAlt, faSearch } from "@fortawesome/free-solid-svg-icons";
-import Sidebar from '../Pharmacy/Sidebar/Sidebar';
 import "./ExpiringMedications.css";
-import Navbar from "../Pharmacy/Sidebar/Navbar";
+import SidebarS from "../Bar/SidebarS";
+import NavbarS from "../Bar/NavbarS";
+
 
 const ExpiringMedications = () => {
   const [expiredMedications, setExpiredMedications] = useState([]);
@@ -49,8 +50,8 @@ const ExpiringMedications = () => {
 
   return (
     <div className="expiring-medications-container">
-      <Navbar />
-      <Sidebar />
+      <NavbarS />
+      <SidebarS />
 
       <div className="main-content">
       <br></br><br></br>
@@ -100,7 +101,7 @@ const ExpiringMedications = () => {
                       <tr key={medication._id}>
                         <td>
                           <img
-                            src={`https://backend-zltr.onrender.com/uploads/${medication.image}`}
+                            src={`http://localhost:5009/uploads/${medication.image}`}
                             alt={medication.name}
                             className="medication-image"
                           />
@@ -195,7 +196,7 @@ const ExpiringMedications = () => {
                       <tr key={medication._id}>
                         <td>
                           <img
-                            src={`https://backend-zltr.onrender.com/uploads/${medication.image}`}
+                            src={`http://localhost:5009/uploads/${medication.image}`}
                             alt={medication.name}
                             className="medication-image"
                           />
@@ -236,7 +237,7 @@ const ExpiringMedications = () => {
                       <tr key={medication._id}>
                         <td>
                           <img
-                            src={`https://backend-zltr.onrender.com/uploads/${medication.image}`}
+                            src={`http://localhost:5009/uploads/${medication.image}`}
                             alt={medication.name}
                             className="medication-image"
                           />
@@ -277,7 +278,7 @@ const ExpiringMedications = () => {
                       <tr key={medication._id}>
                         <td>
                           <img
-                            src={`https://backend-zltr.onrender.com/uploads/${medication.image}`}
+                            src={`http://localhost:5009/uploads/${medication.image}`}
                             alt={medication.name}
                             className="medication-image"
                           />
