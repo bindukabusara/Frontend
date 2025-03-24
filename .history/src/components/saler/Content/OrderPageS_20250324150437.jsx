@@ -43,6 +43,16 @@ const AllCartsPage = () => {
       }
       groupedCarts[userId].carts.push(cart);
     });
+    carts.forEach((cart) => {
+      const phoneNumber = cart.phoneNumber?.phoneNumber || "unknown";
+      if (!groupedCarts[phoneNumber]) {
+        groupedCarts[phoneNumber] = {
+          phoneNumber: cart.phoneNumber,
+          carts: [],
+        };
+      }
+      groupedCarts[phoneNumber].carts.push(cart);
+    });
 
     return groupedCarts;
   };
@@ -135,7 +145,7 @@ const AllCartsPage = () => {
                       {/* Display phone number only in the first row */}
                       {index === 0 ? (
                         <td rowSpan={userGroup.carts.length}>
-                          {userGroup.user?.phoneNumber || ""}
+                          {userGroup.phoneNumber?.phoneNumber || ""}
                         </td>
                       ) : null}
                       <td>

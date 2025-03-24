@@ -156,7 +156,7 @@ const ReportPage = () => {
                 <div className="card-title-section">
                   <Card.Title>Expiring in one week</Card.Title>
                 </div>
-                <div className="card-value-section" style={{ backgroundColor: "#EF9651" }}>
+                <div className="card-value-section" style={{ backgroundColor: "EF9651" }}>
                   <Card.Text className="card-value">{expiringSoon}</Card.Text>
                 </div>
               </Card>

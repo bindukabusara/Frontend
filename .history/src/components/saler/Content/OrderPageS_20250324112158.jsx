@@ -135,7 +135,7 @@ const AllCartsPage = () => {
                       {/* Display phone number only in the first row */}
                       {index === 0 ? (
                         <td rowSpan={userGroup.carts.length}>
-                          {userGroup.user?.phoneNumber || ""}
+                          {userGroup.user?.phoneNumber || "N/A"}
                         </td>
                       ) : null}
                       <td>

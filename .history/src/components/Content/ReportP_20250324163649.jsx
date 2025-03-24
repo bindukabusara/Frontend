@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Button, Table, Alert, Form, Modal } from "react-bootstrap";
 import axios from "axios";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Legend, Cell, PieChart, Pie } from "recharts";
-import SidebarS from "../Bar/SidebarS";
-import NavbarS from "../Bar/NavbarS";
+import Sidebar from '../Pharmacy/Sidebar/Sidebar';
+import Navbar from "../Pharmacy/Sidebar/Navbar";
 import "./Report.css"; // Custom CSS for the report page
 
 const ReportPage = () => {
@@ -64,6 +64,21 @@ const ReportPage = () => {
     }
   };
 
+  const handleDeleteExpiredMedications = async () => {
+    if (!window.confirm("Are you sure you want to delete all expired medications?")) {
+      return;
+    }
+
+    try {
+      const response = await axios.delete("https://backend-zltr.onrender.com/api/medications/delete-expired");
+      alert(response.data.message); // Show success message
+      fetchReportData(); // Refresh the report data
+    } catch (err) {
+      setError("Failed to delete expired medications");
+      console.error("Error deleting expired medications:", err.response?.data || err.message);
+    }
+  };
+
   const fetchMedicationsByCategory = async (category) => {
     try {
       let endpoint = "";
@@ -91,7 +106,6 @@ const ReportPage = () => {
       }
 
       const response = await axios.get(endpoint);
-      console.log("API Response:", response.data); // Log the API response
       setSelectedMedications(response.data);
       setShowModal(true);
     } catch (err) {
@@ -129,9 +143,9 @@ const ReportPage = () => {
 
   return (
     <div className="report-page-container">
-      <NavbarS />
-      <SidebarS />
-      <div className="main-content">
+      <Navbar />
+      <Sidebar />
+      <div className="main-content"><br></br><br></br>
         <Container>
           <h2>Pharmacy Report</h2>
           {error && <Alert variant="danger">{error}</Alert>}
@@ -144,7 +158,7 @@ const ReportPage = () => {
                 <div className="card-title-section">
                   <Card.Title>Total Medications</Card.Title>
                 </div>
-                <div className="card-value-section" style={{ backgroundColor: "#e3f2fd" }}>
+                <div className="card-value-section" style={{ backgroundColor: "#205781" }}>
                   <Card.Text className="card-value">{totalMedications}</Card.Text>
                 </div>
               </Card>
@@ -168,8 +182,15 @@ const ReportPage = () => {
                 <div className="card-title-section">
                   <Card.Title>Expired Medications</Card.Title>
                 </div>
-                <div className="card-value-section" style={{ backgroundColor: "#ffebee" }}>
+                <div className="card-value-section" style={{ backgroundColor: "#C62E2E" }}>
                   <Card.Text className="card-value">{expiredMedications}</Card.Text>
+                  <Button
+                    variant="danger"
+                    className="mt-2"
+                    onClick={handleDeleteExpiredMedications}
+                  >
+                    Delete All
+                  </Button>
                 </div>
               </Card>
             </Col>
@@ -306,54 +327,90 @@ const ReportPage = () => {
                       <td>Total Medications</td>
                       <td>{totalMedications}</td>
                       <td>
-                        <Button variant="info" onClick={() => fetchMedicationsByCategory("Total Medications")}>
-                          View
-                        </Button>
+                        <center>
+                          <Button
+                            variant="info"
+                            onClick={() => fetchMedicationsByCategory("Total Medications")}
+                            style={{ backgroundColor: "#02487a", color: "white", marginRight: "10px" }}
+                          >
+                            View
+                          </Button>
+                        </center>
                       </td>
                     </tr>
                     <tr>
                       <td>Expiring Soon (Less than 1 week)</td>
                       <td>{expiringSoon}</td>
                       <td>
-                        <Button variant="info" onClick={() => fetchMedicationsByCategory("Expiring Soon")}>
-                          View
-                        </Button>
+                        <center>
+                          <Button
+                            variant="info"
+                            onClick={() => fetchMedicationsByCategory("Expiring Soon")}
+                            style={{ backgroundColor: "#02487a", color: "white", marginRight: "10px" }}
+                          >
+                            View
+                          </Button>
+                        </center>
                       </td>
                     </tr>
                     <tr>
                       <td>Expired Medications</td>
                       <td>{expiredMedications}</td>
                       <td>
-                        <Button variant="info" onClick={() => fetchMedicationsByCategory("Expired Medications")}>
-                          View
-                        </Button>
+                        <center>
+                          <Button
+                            variant="info"
+                            onClick={() => fetchMedicationsByCategory("Expired Medications")}
+                            style={{ backgroundColor: "#02487a", color: "white", marginRight: "10px" }}
+                          >
+                            View
+                          </Button>
+                        </center>
                       </td>
                     </tr>
                     <tr>
                       <td>Expiring in 3 Months</td>
                       <td>{expiringInThreeMonths}</td>
                       <td>
-                        <Button variant="info" onClick={() => fetchMedicationsByCategory("Expiring in 3 Months")}>
-                          View
-                        </Button>
+                        <center>
+                          <Button
+                            variant="info"
+                            onClick={() => fetchMedicationsByCategory("Expiring in 3 Months")}
+                            style={{ backgroundColor: "#02487a", color: "white", marginRight: "10px" }}
+                          >
+                            View
+                          </Button>
+                        </center>
                       </td>
                     </tr>
                     <tr>
                       <td>Low Quantity Medications</td>
                       <td>{lowQuantityMedications}</td>
                       <td>
-                        <Button variant="info" onClick={() => fetchMedicationsByCategory("Low Quantity Medications")}>
-                          View
-                        </Button>
+                        <center>
+                          <Button
+                            variant="info"
+                            onClick={() => fetchMedicationsByCategory("Low Quantity Medications")}
+                            style={{ backgroundColor: "#02487a", color: "white", marginRight: "10px" }}
+                          >
+                            View
+                          </Button>
+                        </center>
                       </td>
                     </tr>
                     <tr>
                       <td>Non-Expired Medications in Stock</td>
                       <td>{nonExpiredMedicationsInStock}</td>
                       <td>
-                        <Button variant="info" onClick={() => fetchMedicationsByCategory("Non-Expired Medications in Stock")}>
-                          View
-                        </Button>
+                        <center>
+                          <Button
+                            variant="info"
+                            onClick={() => fetchMedicationsByCategory("Non-Expired Medications in Stock")}
+                            style={{ backgroundColor: "#02487a", color: "white", marginRight: "10px" }}
+                          >
+                            View
+                          </Button>
+                        </center>
                       </td>
                     </tr>
                   </tbody>
@@ -374,8 +431,8 @@ const ReportPage = () => {
       </div>
 
       {/* Modal to Display Medications */}
-      <Modal show={showModal} onHide={() => setShowModal(false)} size="lg">
-        <Modal.Header closeButton>
+      <Modal show={showModal} onHide={() => setShowModal(false)} size="lg" style={{ backgroundColor: "#fff", color: "white" }}>
+        <Modal.Header closeButton style={{ backgroundColor: "#02487a", color: "white" }}>
           <Modal.Title>Medications</Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -383,20 +440,20 @@ const ReportPage = () => {
             <Table striped bordered hover>
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Quantity</th>
-                  <th>Expiration Date</th>
+                  <th style={{ backgroundColor: "#02487a", color: "white" }}>Name</th>
+                  <th style={{ backgroundColor: "#02487a", color: "white" }}>Quantity</th>
+                  <th style={{ backgroundColor: "#02487a", color: "white" }}>Expiration Date</th>
                 </tr>
               </thead>
               <tbody>
-          {selectedMedications.map((medication, index) => (
-            <tr key={index}>
-              <td>{medication.name}</td>
-              <td>{medication.quantity}</td>
-              <td>{new Date(medication.expireDate).toLocaleDateString()}</td>
-            </tr>
-          ))}
-        </tbody>
+                {selectedMedications.map((medication, index) => (
+                  <tr key={index}>
+                    <td>{medication.name}</td>
+                    <td>{medication.quantity}</td>
+                    <td>{new Date(medication.expireDate).toLocaleDateString()}</td>
+                  </tr>
+                ))}
+              </tbody>
             </Table>
           </div>
         </Modal.Body>
