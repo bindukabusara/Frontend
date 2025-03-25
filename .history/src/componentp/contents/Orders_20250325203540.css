@@ -230,33 +230,12 @@ h2 {
   }
 }
 
-@media (max-width: 576px) {
-  .main-content {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
 
-  .med-card {
-    border-radius: 10px;
-    margin-bottom: 15px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  .user-info {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  .search-bar {
-    padding-left: 0;
-    padding-right: 0;
-  }
-}
 
 /* Add these at the bottom of your existing Orders.css */
 @media (max-width: 576px) {
   .order-container {
-    padding-top: 60px;
+    padding-top: 10px;
   }
 
   .main-content {
