@@ -1,0 +1,74 @@
+.reminder-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .main-content {
+    flex-grow: 1;
+    padding: 20px;
+    margin-left: 320px;
+    transition: margin-left 0.3s ease;
+  }
+
+  .reminder-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: none;
+  }
+
+  .reminder-card .card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #eee;
+    border-radius: 10px 10px 0 0 !important;
+  }
+
+  .reminder-list {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* Status badges */
+  .badge-warning {
+    background-color: #ffc107;
+    color: #212529;
+  }
+
+  .badge-success {
+    background-color: #28a745;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 992px) {
+    .main-content {
+      margin-left: 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .main-content {
+      padding: 15px;
+    }
+
+    .reminder-card {
+      border-radius: 0;
+      box-shadow: none;
+      border-bottom: 1px solid #eee;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .main-content {
+      padding: 10px;
+    }
+
+    .reminder-card .card-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .reminder-card .card-header .btn {
+      margin-top: 10px;
+      width: 100%;
+    }
+  }
