@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import '../bar/sidebar.css';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,40 +10,23 @@ import {
   faCartShopping,
   faNoteSticky,
   faBars,
-  faTimes
 } from '@fortawesome/free-solid-svg-icons';
 
 function Sidebar() {
-  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+  const [isSidebarVisible, setIsSidebarVisible] = useState(false); // State to manage sidebar visibility
 
   const toggleSidebar = () => {
-    setIsSidebarVisible(!isSidebarVisible);
+    setIsSidebarVisible(!isSidebarVisible); // Toggle sidebar visibility
   };
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (isSidebarVisible && !event.target.closest('.sidebar')) {
-        setIsSidebarVisible(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isSidebarVisible]);
 
   return (
     <>
+      {/* Toggle Button for Small Screens */}
       <button className="sidebar-toggle" onClick={toggleSidebar}>
-        <FontAwesomeIcon icon={isSidebarVisible ? faTimes : faBars} />
+        <FontAwesomeIcon icon={faBars} />
       </button>
 
-      <div
-        className={`sidebar-overlay ${isSidebarVisible ? 'visible' : ''}`}
-        onClick={toggleSidebar}
-      />
-
+      {/* Sidebar */}
       <div className={`sidebar ${isSidebarVisible ? 'visible' : ''}`}>
         <h2>Main</h2>
         <ul>
@@ -51,7 +34,6 @@ function Sidebar() {
             <NavLink
               to="/dash"
               className={({ isActive }) => (isActive ? 'active' : '')}
-              onClick={() => setIsSidebarVisible(false)}
             >
               <FontAwesomeIcon icon={faTachometerAlt} /> Dashboard
             </NavLink>
@@ -64,7 +46,6 @@ function Sidebar() {
             <NavLink
               to="/card"
               className={({ isActive }) => (isActive ? 'active' : '')}
-              onClick={() => setIsSidebarVisible(false)}
             >
               <FontAwesomeIcon icon={faCartShopping} /> Cart
             </NavLink>
@@ -77,7 +58,6 @@ function Sidebar() {
             <NavLink
               to="/"
               className={({ isActive }) => (isActive ? 'active' : '')}
-              onClick={() => setIsSidebarVisible(false)}
             >
               <FontAwesomeIcon icon={faCalendarAlt} /> Reminder
             </NavLink>
@@ -90,7 +70,6 @@ function Sidebar() {
             <NavLink
               to="/"
               className={({ isActive }) => (isActive ? 'active' : '')}
-              onClick={() => setIsSidebarVisible(false)}
             >
               <FontAwesomeIcon icon={faNoteSticky} /> Reports
             </NavLink>
@@ -103,7 +82,6 @@ function Sidebar() {
             <NavLink
               to="/"
               className={({ isActive }) => (isActive ? 'active' : '')}
-              onClick={() => setIsSidebarVisible(false)}
             >
               <FontAwesomeIcon icon={faCog} /> Settings
             </NavLink>
@@ -116,7 +94,6 @@ function Sidebar() {
             <NavLink
               to="/support"
               className={({ isActive }) => (isActive ? 'active' : '')}
-              onClick={() => setIsSidebarVisible(false)}
             >
               <FontAwesomeIcon icon={faLifeRing} /> Support
             </NavLink>
