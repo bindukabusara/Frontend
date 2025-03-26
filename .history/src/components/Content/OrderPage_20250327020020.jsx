@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { Container, Table, Button, Alert, Modal, Form, Spinner } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Sidebar from '../Pharmacy/Sidebar/Sidebar';
-
+import Sidebar from "../Pharmacy/Sidebar/sidebar";
 import Navbar from "../Pharmacy/Sidebar/Navbar";
 import "./order.css";
 import "./MedicationStore.css";
