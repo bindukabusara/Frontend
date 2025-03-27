@@ -6,8 +6,6 @@ import SidebarP from "../bar/SidebarP";
 import NavbarP from "../bar/NavbarP";
 import "./reminder.css";
 
-const API_BASE_URL = "https://backend-zltr.onrender.com";
-
 const ReminderPage = () => {
   const [reminders, setReminders] = useState([]);
   const [error, setError] = useState("");
@@ -16,52 +14,31 @@ const ReminderPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [activeAlerts, setActiveAlerts] = useState([]);
-  const [currentUser, setCurrentUser] = useState(null);
   const navigate = useNavigate();
 
-  // Get current user info
-  const getCurrentUser = async () => {
+  // Fetch all reminders and confirmed orders
+  const fetchReminders = async () => {
     try {
+      setIsLoading(true);
       const token = localStorage.getItem("token");
       if (!token) {
         navigate("/login");
         return;
       }
 
-      const response = await axios.get(`${API_BASE_URL}/api/auth/me`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      setCurrentUser(response.data);
-    } catch (err) {
-      console.error("Error fetching user:", err);
-      navigate("/login");
-    }
-  };
-
-  // Fetch reminders for the current user only
-  const fetchReminders = async () => {
-    try {
-      setIsLoading(true);
-      const token = localStorage.getItem("token");
-      if (!token || !currentUser) {
-        navigate("/login");
-        return;
-      }
-
       const headers = { Authorization: `Bearer ${token}` };
 
-      // Fetch user-specific reminders and orders
+      // Fetch both reminders and confirmed orders in parallel
       const [remindersResponse, ordersResponse] = await Promise.all([
-        axios.get(`${API_BASE_URL}/api/reminders/user/${currentUser._id}`, { headers })
-          .catch(() => ({ data: [] })),
-        axios.get(`${API_BASE_URL}/api/orders/user/${currentUser._id}/confirmed`, { headers })
-          .catch(() => ({ data: [] }))
+        axios.get("http://localhost:5009/api/reminders", { headers }).catch(() => ({ data: [] })),
+        axios.get("http://localhost:5009/api/orders/confirmed", { headers }).catch(() => ({ data: [] }))
       ]);
 
       // Transform confirmed orders into reminder format
       const orderReminders = ordersResponse.data.map(order => ({
         _id: order._id,
         patientId: order.userId?._id,
+        patientName: order.userId ? `${order.userId.firstName} ${order.userId.lastName}` : "Unknown Patient",
         medicationId: order.medicationId?._id,
         medicationName: order.medicationId?.name || order.name,
         medicationImage: order.medicationId?.image || order.image,
@@ -72,8 +49,13 @@ const ReminderPage = () => {
         isFromOrder: true
       }));
 
-      // Combine reminders
-      setReminders([...remindersResponse.data, ...orderReminders]);
+      // Combine and deduplicate reminders
+      const combinedReminders = [...remindersResponse.data, ...orderReminders];
+      const uniqueReminders = combinedReminders.filter(
+        (reminder, index, self) => index === self.findIndex(r => r._id === reminder._id)
+      );
+
+      setReminders(uniqueReminders);
     } catch (err) {
       console.error("Fetch error:", err);
       setError(err.response?.data?.message || "Failed to fetch reminders");
@@ -86,9 +68,9 @@ const ReminderPage = () => {
   const playAlertSound = () => {
     try {
       const audio = new Audio("/alarm.mp3");
-      audio.loop = true;
+      audio.loop = true; // Make the alarm repeat until dismissed
       audio.play().catch(e => console.log("Audio play failed:", e));
-      return audio;
+      return audio; // Return audio object so we can stop it later
     } catch (e) {
       console.log("Audio error:", e);
       return null;
@@ -108,9 +90,9 @@ const ReminderPage = () => {
     if (!("Notification" in window)) return;
 
     const notificationOptions = {
-      body: `${reminder.instructions}\n${reminder.additionalNotes || ''}`,
+      body: `Instructions: ${reminder.instructions}\n${reminder.additionalNotes ? `Notes: ${reminder.additionalNotes}` : ''}`,
       icon: "/medication-icon.png",
-      requireInteraction: true
+      requireInteraction: true // Keep notification visible until dismissed
     };
 
     if (Notification.permission === "granted") {
@@ -124,17 +106,20 @@ const ReminderPage = () => {
     }
   };
 
-  // Check for due reminders for current user
+  // Check for due reminders
   const checkDueReminders = () => {
-    if (!currentUser) return;
-
     const now = new Date();
-    const currentTime = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+    const currentHours = now.getHours().toString().padStart(2, '0');
+    const currentMinutes = now.getMinutes().toString().padStart(2, '0');
+    const currentTime = `${currentHours}:${currentMinutes}`;
 
     const dueItems = reminders.filter(reminder => {
+      // Check if any of the reminder times matches current time
       const isDue = reminder.timesToTake?.some(time => {
+        // Normalize time format (handle both "8:00" and "08:00")
         const [hours, minutes] = time.split(':');
-        return `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}` === currentTime;
+        const formattedTime = `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}`;
+        return formattedTime === currentTime;
       });
 
       return isDue &&
@@ -145,6 +130,7 @@ const ReminderPage = () => {
     if (dueItems.length > 0) {
       const audio = playAlertSound();
       const alertsWithAudio = dueItems.map(item => ({ ...item, audio }));
+
       setActiveAlerts(prev => [...prev, ...alertsWithAudio]);
       dueItems.forEach(showNotification);
     }
@@ -164,14 +150,14 @@ const ReminderPage = () => {
       let response;
 
       if (isFromOrder) {
-        response = await axios.patch(
-          `${API_BASE_URL}/api/orders/${reminderId}/complete`,
-          {},
+        response = await axios.post(
+          `http://localhost:5009/api/orders/provide-instructions`,
+          { orderId: reminderId, status: "completed" },
           { headers }
         );
       } else {
-        response = await axios.patch(
-          `${API_BASE_URL}/api/reminders/${reminderId}/complete`,
+        response = await axios.post(
+          `http://localhost:5009/api/reminders/${reminderId}/complete`,
           {},
           { headers }
         );
@@ -208,26 +194,13 @@ const ReminderPage = () => {
     setActiveAlerts(prev => prev.filter(a => a._id !== reminderId));
   };
 
-  // Initialize component
   useEffect(() => {
-    getCurrentUser();
-  }, []);
-
-  // Fetch reminders when user is loaded
-  useEffect(() => {
-    if (currentUser) {
-      fetchReminders();
-    }
-  }, [currentUser]);
-
-  // Set up interval for checking reminders
-  useEffect(() => {
-    if (!currentUser) return;
+    fetchReminders();
 
     // Check immediately when component mounts
     checkDueReminders();
 
-    // Set up interval to check every 30 seconds
+    // Set up interval to check every 30 seconds (more responsive)
     const interval = setInterval(checkDueReminders, 30000);
 
     // Request notification permission
@@ -237,14 +210,14 @@ const ReminderPage = () => {
 
     return () => {
       clearInterval(interval);
-      // Clean up any playing audio
+      // Clean up any playing audio when component unmounts
       activeAlerts.forEach(alert => {
         if (alert.audio) {
           stopAlertSound(alert.audio);
         }
       });
     };
-  }, [currentUser, reminders]);
+  }, [reminders]); // Add reminders to dependency array
 
   return (
     <div className="reminder-page-container">
@@ -252,9 +225,7 @@ const ReminderPage = () => {
       <SidebarP />
       <div className="main-content">
         <Container>
-          <h2 className="mb-4" style={{ color: '#02487a' }}>
-            {currentUser ? `${currentUser.firstName}'s Medication Reminders` : "My Reminders"}
-          </h2>
+          <h2 className="mb-4" style={{ color: '#02487a' }}>Medication Reminders</h2>
 
           {error && (
             <Alert variant="danger" onClose={() => setError("")} dismissible>
@@ -273,7 +244,7 @@ const ReminderPage = () => {
             <div className="alerts-section mb-4">
               <h4 className="text-danger">
                 <i className="bi bi-bell-fill me-2"></i>
-                Medication Due Now
+                Active Medication Alerts
               </h4>
               {activeAlerts.map(alert => (
                 <Alert
@@ -321,7 +292,7 @@ const ReminderPage = () => {
           {isLoading && !reminders.length ? (
             <div className="text-center my-5">
               <Spinner animation="border" />
-              <p>Loading your reminders...</p>
+              <p>Loading reminders...</p>
             </div>
           ) : (
             <Table striped bordered hover responsive>
@@ -329,7 +300,7 @@ const ReminderPage = () => {
                 <tr>
                   <th>Medication</th>
                   <th>Instructions</th>
-                  <th>Schedule</th>
+                  <th>Times</th>
                   <th>Status</th>
                   <th>Actions</th>
                 </tr>
@@ -342,7 +313,7 @@ const ReminderPage = () => {
                         <div className="d-flex align-items-center">
                           <div className="me-3">
                             <img
-                              src={`${API_BASE_URL}/uploads/${reminder.medicationImage || 'default-medication.png'}`}
+                              src={`http://localhost:5009/uploads/${reminder.medicationImage || 'default-medication.png'}`}
                               alt={reminder.medicationName}
                               className="medication-thumbnail"
                               onError={(e) => {
@@ -353,6 +324,11 @@ const ReminderPage = () => {
                           </div>
                           <div>
                             <strong>{reminder.medicationName}</strong>
+                            {reminder.patientName && (
+                              <div className="text-muted small">
+                                For: {reminder.patientName}
+                              </div>
+                            )}
                           </div>
                         </div>
                       </td>
@@ -432,7 +408,7 @@ const ReminderPage = () => {
               <div className="d-flex mb-4">
                 <div className="me-4">
                   <img
-                    src={`${API_BASE_URL}/uploads/${selectedReminder.medicationImage || 'default-medication.png'}`}
+                    src={`http://localhost:5009/uploads/${selectedReminder.medicationImage || 'default-medication.png'}`}
                     alt={selectedReminder.medicationName}
                     className="medication-image-large"
                     onError={(e) => {
@@ -445,7 +421,7 @@ const ReminderPage = () => {
                   <h4>{selectedReminder.medicationName}</h4>
                   <p className="text-muted">
                     <i className="bi bi-person-fill me-2"></i>
-                    For: {currentUser ? `${currentUser.firstName} ${currentUser.lastName}` : "You"}
+                    For: {selectedReminder.patientName || "Unknown Patient"}
                   </p>
 
                   <div className="mb-3">
