@@ -30,8 +30,8 @@ const ReminderPage = () => {
 
       // Fetch both reminders and confirmed orders in parallel
       const [remindersResponse, ordersResponse] = await Promise.all([
-        axios.get("https://backend-zltr.onrender.com/api/reminders", { headers }).catch(() => ({ data: [] })),
-        axios.get("https://backend-zltr.onrender.com/orders/confirmed", { headers }).catch(() => ({ data: [] }))
+        axios.get("http://localhost:5009/api/reminders", { headers }).catch(() => ({ data: [] })),
+        axios.get("http://localhost:5009/api/orders/confirmed", { headers }).catch(() => ({ data: [] }))
       ]);
 
       // Transform confirmed orders into reminder format
@@ -151,13 +151,13 @@ const ReminderPage = () => {
 
       if (isFromOrder) {
         response = await axios.post(
-          `https://backend-zltr.onrender.com/api/orders/provide-instructions`,
+          `http://localhost:5009/api/orders/provide-instructions`,
           { orderId: reminderId, status: "completed" },
           { headers }
         );
       } else {
         response = await axios.post(
-          `https://backend-zltr.onrender.com/api/reminders/${reminderId}/complete`,
+          `http://localhost:5009/api/reminders/${reminderId}/complete`,
           {},
           { headers }
         );
@@ -313,7 +313,7 @@ const ReminderPage = () => {
                         <div className="d-flex align-items-center">
                           <div className="me-3">
                             <img
-                              src={`https://backend-zltr.onrender.com/uploads/${reminder.medicationImage || 'default-medication.png'}`}
+                              src={`http://localhost:5009/uploads/${reminder.medicationImage || 'default-medication.png'}`}
                               alt={reminder.medicationName}
                               className="medication-thumbnail"
                               onError={(e) => {
@@ -408,7 +408,7 @@ const ReminderPage = () => {
               <div className="d-flex mb-4">
                 <div className="me-4">
                   <img
-                    src={`https://backend-zltr.onrender.com/uploads/${selectedReminder.medicationImage || 'default-medication.png'}`}
+                    src={`http://localhost:5009/uploads/${selectedReminder.medicationImage || 'default-medication.png'}`}
                     alt={selectedReminder.medicationName}
                     className="medication-image-large"
                     onError={(e) => {
