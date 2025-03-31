@@ -1,0 +1,110 @@
+/* Support Page Styles */
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+  }
+
+  .main-content {
+    flex: 1;
+    padding: 20px;
+    margin-left: 250px; /* Adjust based on your sidebar width */
+  }
+
+  .support-header {
+    background-color: #E3FDFD;
+    padding: 40px 0;
+    text-align: center;
+    margin-bottom: 30px;
+    border-radius: 10px;
+  }
+
+  .support-header h1 {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .support-icon {
+    color: #02487a;
+    margin-right: 10px;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 25px;
+    text-align: center;
+  }
+
+  .quick-links {
+    padding: 30px 0;
+  }
+
+  .quick-link-card {
+    height: 100%;
+    transition: transform 0.3s ease;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+
+  .quick-link-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .quick-link-icon {
+    font-size: 2rem;
+    color: #02487a;
+    margin-bottom: 15px;
+  }
+
+  .help-resources, .video-tutorials {
+    padding: 30px 0;
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+
+  .video-tutorials {
+    background-color: #f8f9fa;
+  }
+
+  .card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    margin-bottom: 20px;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+  }
+
+  .ListGroup-item {
+    padding: 12px;
+    border-left: none;
+    border-right: none;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 992px) {
+    .main-content {
+      margin-left: 0;
+      padding-top: 70px; /* Account for navbar height */
+    }
+
+    .support-header h1 {
+      font-size: 1.8rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+    }
+
+    .quick-link-icon {
+      font-size: 1.5rem;
+    }
+  }
