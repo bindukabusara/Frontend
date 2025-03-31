@@ -28,18 +28,7 @@ function Sidebar() {
             </NavLink>
           </li>
         </ul>
-        <h2>Store Management</h2>
-        <ul>
-          <li>
-            <NavLink
-              to="/store"
-              className={({ isActive }) => (isActive ? 'active' : '')} // Apply active class
-            >
-              <FontAwesomeIcon icon={faStore} /> Store
-            </NavLink>
-          </li>
 
-        </ul>
         <h2>Medications</h2>
         <ul>
           <li>
@@ -52,7 +41,18 @@ function Sidebar() {
           </li>
         </ul>
 
+        <h2>Store Management</h2>
+        <ul>
+          <li>
+            <NavLink
+              to="/store"
+              className={({ isActive }) => (isActive ? 'active' : '')} // Apply active class
+            >
+              <FontAwesomeIcon icon={faStore} /> Store
+            </NavLink>
+          </li>
 
+        </ul>
 
         <h2>Orders</h2>
         <ul>
@@ -94,7 +94,7 @@ function Sidebar() {
         <ul>
           <li>
             <NavLink
-              to="/salesupportS"
+              to="/supportS"
               className={({ isActive }) => (isActive ? 'active' : '')} // Apply active class
             >
               <FontAwesomeIcon icon={faLifeRing} /> Support

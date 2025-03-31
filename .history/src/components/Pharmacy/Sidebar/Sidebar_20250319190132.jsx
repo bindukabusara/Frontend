@@ -1,5 +1,6 @@
-import './sidebar.css';
-import { NavLink } from 'react-router-dom'; // Replace Link with NavLink
+import { useState } from 'react';
+import '../Sidebar/sidebar.css';
+import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faTachometerAlt,
@@ -9,57 +10,67 @@ import {
   faChartLine,
   faCog,
   faLifeRing,
+  faBars,
 } from '@fortawesome/free-solid-svg-icons';
 
 function Sidebar() {
+  const [isSidebarVisible, setIsSidebarVisible] = useState(false); // State to manage sidebar visibility
+
+  const toggleSidebar = () => {
+    setIsSidebarVisible(!isSidebarVisible); // Toggle sidebar visibility
+  };
+
   return (
-    <><br></br><br></br><br></br>
-      <div className="sidebar">
+    <>
+      {/* Toggle Button for Small Screens */}
+      <button className="sidebar-toggle" onClick={toggleSidebar}>
+        <FontAwesomeIcon icon={faBars} />
+      </button>
 
-
+      {/* Sidebar */}
+      <div className={`sidebar ${isSidebarVisible ? 'visible' : ''}`}>
         <h2>Main</h2>
         <ul>
           <li>
             <NavLink
-              to="/dashboardS"
-              className={({ isActive }) => (isActive ? 'active' : '')} // Apply active class
+              to="/dashboard"
+              className={({ isActive }) => (isActive ? 'active' : '')}
             >
               <FontAwesomeIcon icon={faTachometerAlt} /> Dashboard
             </NavLink>
           </li>
         </ul>
-        <h2>Store Management</h2>
-        <ul>
-          <li>
-            <NavLink
-              to="/store"
-              className={({ isActive }) => (isActive ? 'active' : '')} // Apply active class
-            >
-              <FontAwesomeIcon icon={faStore} /> Store
-            </NavLink>
-          </li>
 
-        </ul>
         <h2>Medications</h2>
         <ul>
           <li>
             <NavLink
-              to="/expiring-medicationsS"
-              className={({ isActive }) => (isActive ? 'active' : '')} // Apply active class
+              to="/expiring-medications"
+              className={({ isActive }) => (isActive ? 'active' : '')}
             >
               <FontAwesomeIcon icon={faPills} /> Expiring Medications
             </NavLink>
           </li>
         </ul>
 
-
+        <h2>Store Management</h2>
+        <ul>
+          <li>
+            <NavLink
+              to="/medications"
+              className={({ isActive }) => (isActive ? 'active' : '')}
+            >
+              <FontAwesomeIcon icon={faStore} /> Store
+            </NavLink>
+          </li>
+        </ul>
 
         <h2>Orders</h2>
         <ul>
           <li>
             <NavLink
-              to="/orderS"
-              className={({ isActive }) => (isActive ? 'active' : '')} // Apply active class
+              to="/order"
+              className={({ isActive }) => (isActive ? 'active' : '')}
             >
               <FontAwesomeIcon icon={faBox} /> Orders
             </NavLink>
@@ -70,8 +81,8 @@ function Sidebar() {
         <ul>
           <li>
             <NavLink
-              to="/reportS"
-              className={({ isActive }) => (isActive ? 'active' : '')} // Apply active class
+              to="/reportP"
+              className={({ isActive }) => (isActive ? 'active' : '')}
             >
               <FontAwesomeIcon icon={faChartLine} /> Reports
             </NavLink>
@@ -82,8 +93,8 @@ function Sidebar() {
         <ul>
           <li>
             <NavLink
-              to="/settingS"
-              className={({ isActive }) => (isActive ? 'active' : '')} // Apply active class
+              to="/setting"
+              className={({ isActive }) => (isActive ? 'active' : '')}
             >
               <FontAwesomeIcon icon={faCog} /> Settings
             </NavLink>
@@ -94,8 +105,8 @@ function Sidebar() {
         <ul>
           <li>
             <NavLink
-              to="/salesupportS"
-              className={({ isActive }) => (isActive ? 'active' : '')} // Apply active class
+              to="/support"
+              className={({ isActive }) => (isActive ? 'active' : '')}
             >
               <FontAwesomeIcon icon={faLifeRing} /> Support
             </NavLink>

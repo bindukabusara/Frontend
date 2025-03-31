@@ -54,6 +54,7 @@ const Dashboard = () => {
       <Sidebar />
       <div className="main-content">
         <Container>
+          <br></br>
           <h2>Pharmacy Dashboard</h2>
           {error && <Alert variant="danger">{error}</Alert>}
 
